@@ -20,4 +20,3 @@ test: $(OBJS)
 
 clean:
 	rm $(OBJS) $(EXEC)
-
