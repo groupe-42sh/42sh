@@ -1,4 +1,3 @@
-$(info $(SHELL))
 CC = gcc
 CD = -g
 CFLAGS = -Werror -Wextra -Wall -pedantic -std=c99

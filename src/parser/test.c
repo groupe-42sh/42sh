@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "parser.c"
 
 int main(void)
 {
-    printf("aaaaa\n");
     return 0;
 }
