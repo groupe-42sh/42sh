@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra -std=c99 -pedantic -I./include -g
 
 EXEC = test
 
-SRC = src/test.c src/parser.c
+SRC = src/ini.c src/parser.c src/extract.c src/ast.c
 
 VPATH = src/
 
