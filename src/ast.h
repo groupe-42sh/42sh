@@ -3,14 +3,14 @@
 #include "parser.h"
 
 enum sep {
-    rien,
-    point_virgule,
-    esperluette
+    RIEN,
+    POINT_VIRGULE,
+    ESPERLUETTE
 };
 
 enum relation {
-    double_esperluette,
-    double_pipe
+    DOUBLE_ESPERLUETTE,
+    DOUBLE_PIPE
 };
 
 enum command_type {
@@ -36,7 +36,7 @@ struct ast_node_input {
 };
 
 struct ast_node_list {
-    struct ast_node_andor *and_ors;
+    struct ast_node_and_or *and_ors;
 };
 
 struct ast_node_and_or {

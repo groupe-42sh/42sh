@@ -119,24 +119,97 @@ void reinit_capture(struct parser_s *p)
     p->capture->tag = NULL;   
 }
 
-bool parser_readandor (struct parser_s *p)
+bool parser_readpipeline(struct parser_s *p, struct ast_node_pipeline *pipeline)
 {
-    return parser_readidentifier(p);
+    p = p;
+    pipeline = pipeline;
+    return false;
+}
+
+bool parser_read_doubleesperluette(struct parser_s *p)
+{
+    int tmp = p->index;
+
+    if (parser_readchar(p, '&') && parser_readchar(p, '&'))
+        return true;
+    p->index = tmp;
+    return false;
+}
+
+bool parser_read_doublepipe(struct parser_s *p)
+{
+    int tmp = p->index;
+
+    if (parser_readchar(p, '|') && parser_readchar(p, '|'))
+        return true;
+    p->index = tmp;
+    return false;
+}
+
+bool parser_readandor (struct parser_s *p, struct ast_node_and_or *cur_andor)
+{
+    //    if (parser_readpipeline(p, cur_andor->pipeline))
+    //    {
+    //        enum relation rel = DOUBLE_ESPERLUETTE;
+    //        rel = rel;
+    //
+    //        if (parser_read_doublepipe(p))
+    //            rel = DOUBLE_PIPE;
+    //        else 
+    //        {
+    //            parser_read_doubleesperluette(p);
+    //            rel = DOUBLE_ESPERLUETTE;
+    //        }
+    //
+    //        struct ast_node_pipeline *new_pipeline = malloc(sizeof(struct
+    //                    ast_node_pipeline));
+    //
+    //        cur_andor->pipeline = new_pipeline;
+    //
+    //        if (parser_readpipeline(p, new_pipeline))
+    //            return parser_readandor(p, cur_andor);
+    //    }
+    //    else
+    //        return true;
+    p =p ;
+    cur_andor = cur_andor;
+    return true;
 }
 
 bool recurse_on_andor (struct parser_s *p)
 {
-    if (parser_readchar(p, ';') || parser_readchar(p, '&'))
-    {
-        //avancer sur les espaces ici
-        if (parser_peekchar(p, '\n') || parser_peekchar(p, EOF)) 
-            return true;
+    struct ast_node_list *list = p->ast->list;
 
-        if (parser_readandor(p))
-            return recurse_on_andor(p);
-        else
-            return false;
+    enum sep separator = RIEN;
+
+    if (parser_readchar(p, ';'))
+        separator = POINT_VIRGULE;
+    else
+    {
+        parser_readchar(p, '&');
+        separator = ESPERLUETTE;
     }
+
+    struct ast_node_and_or *new = malloc(sizeof(struct ast_node_and_or));
+    new->separator = separator;
+    new->pipeline = NULL;
+    new->next = NULL;
+
+    struct ast_node_and_or *last = list->and_ors;
+    while (last->next)
+        last = last->next;
+
+    last->next = new;
+
+    //avancer sur les espaces ici
+    if (parser_peekchar(p, '\n') || parser_peekchar(p, EOF)) 
+        return true;
+
+    if (parser_readandor(p, new))
+        return recurse_on_andor(p);
+    else
+        return false;
+
     return true;
 }
 
@@ -144,10 +217,13 @@ bool parser_readlist (struct parser_s *p)
 {
     int tmp = p->index;
     tmp = tmp;
-    if (parser_readandor(p))
-    {
-        //struct ast_node_list *list;
+    struct ast_node_list *list = {NULL};
+    p->ast->list = list;
 
+    struct ast_node_and_or *and_or = {RIEN, NULL, NULL}; 
+
+    if (parser_readandor(p, and_or))
+    {
         // CAS OU IL Y A PONCTUATION
         if (parser_peekchar(p, ';') || parser_peekchar(p, '&'))
         {
@@ -156,8 +232,8 @@ bool parser_readlist (struct parser_s *p)
         else
             return true;
     }
-    
-    return true;
+    tmp = p->index;
+    return false;
 }
 
 bool parser_readinput (struct parser_s *p)
@@ -170,6 +246,32 @@ bool parser_readinput (struct parser_s *p)
         return true;
     if (parser_readlist(p) && ((parser_readchar(p, '\n') || parser_eof(p))))
         return true;
-    //tmp = p->index;
+    tmp = p->index;
     return false;
+}
+
+bool etoile(bool(func(struct parser_s *)), struct parser_s *p)
+{
+    bool r = true;
+    while(r)
+        r = func(p);
+    return r;
+}
+
+bool plus(bool(func(struct parser_s *)), struct parser_s *p)
+{
+    bool r = false;
+
+    if ((r = func(p)))
+    {
+        while(r)
+            r = func(p);
+        return r;
+    }
+    return r;
+}
+
+bool interrogation(bool(func(struct parser_s *)), struct parser_s *p)
+{
+    return func(p);
 }
