@@ -10,18 +10,11 @@ int read_input(struct parser_s *p)
     return parser_readinput(p);
 }
 
-bool test(struct parser_s *p)
+int test(struct parser_s *p)
 {
-    if (p->index <= 7)
-    {
-        ++p->index;
-        if (p->index == 6)
-            return false;
-    }
-    printf("aAa\n");
-    return true;
+    p = p;
+    return -1;
 }
-
 
 int main(int ac, char **av)
 {
@@ -29,12 +22,14 @@ int main(int ac, char **av)
     av = av;
     struct parser_s *p = parser_new_from_string("content");
     
-    bool (*pf)(struct parser_s *);
+    int (*pf)(struct parser_s *);
     pf = &test;
     
-    //p->index = 6;
+    p->index = 9;
     if (plus(pf, p))
-        printf("fail\n");
+        printf("passed\n");
+    else
+        printf("failed\n");
 
     //etoile(pf, p);
     //interrogation(pf, p);

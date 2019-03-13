@@ -250,28 +250,34 @@ bool parser_readinput (struct parser_s *p)
     return false;
 }
 
-bool etoile(bool(func(struct parser_s *)), struct parser_s *p)
+bool etoile(int(func(struct parser_s *)), struct parser_s *p)
 {
-    bool r = true;
-    while(r)
+    int r = 1;
+    while(r == 1)
         r = func(p);
-    return r;
+    if (r == -1)
+        return false;
+    return true;
 }
 
-bool plus(bool(func(struct parser_s *)), struct parser_s *p)
+bool plus(int(func(struct parser_s *)), struct parser_s *p)
 {
-    bool r = false;
-
-    if ((r = func(p)))
+    int r = -1;
+    r = func(p);
+    if (r)
     {
-        while(r)
+        while (r == 1)
             r = func(p);
-        return r;
+        if (r == -1)
+            return false;
+        return true;
     }
-    return r;
+    return false;
 }
 
-bool interrogation(bool(func(struct parser_s *)), struct parser_s *p)
+bool interrogation(int(func(struct parser_s *)), struct parser_s *p)
 {
-    return func(p);
+    if (func(p) == -1)
+        return false;
+    return true;
 }
