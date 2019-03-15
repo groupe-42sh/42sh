@@ -219,16 +219,6 @@ char *get_word(struct parser_s *p)
     return word;
 }
 
-struct ast_node_word *parser_readword(struct parser_s *p)
-{
-    struct ast_node_word *word = malloc(sizeof(struct ast_node_word));
-    word->next = NULL;
-
-    if (!(word->str = get_word(p)))
-        return NULL;
-    return word;
-}
-
 struct ast_node_redirection *parser_readredirection(struct parser_s *p)
 {
     struct ast_node_redirection *redirection =
@@ -244,45 +234,24 @@ struct ast_node_redirection *parser_readredirection(struct parser_s *p)
     if (!redirection->redirection_type)
         return NULL;
   
-    struct ast_node_word *word = parser_readword(p);
-
+    char *word = get_word(p);
     if (!word)
         return NULL;
 
     if ((redirection->redirection_type == LTLT)
         || (redirection->redirection_type == LTLTDASH))
     {
-        redirection->word_heredoc.heredoc = word->str;
-        redirection->word_heredoc.word->str = NULL;
+        redirection->word_heredoc.heredoc = word;
+        redirection->word_heredoc.word = NULL;
     }
     else
     {
         redirection->word_heredoc.heredoc = NULL;
-        redirection->word_heredoc.word->str = word->str;
+        redirection->word_heredoc.word = word;
     }
     
     redirection->next = NULL;
     return redirection;
-}
-
-struct ast_node_compound_list *parser_readcompoundlist(struct parser_s *p)
-{
-//    struct ast_node_compound_list *compound_list =
-//        malloc(sizeof(struct ast_node_compound_list));
-//
-//    compound_list->next = NULL;
-//
-//    eat_newlines(p);
-//    
-//    struct ast_node_and_or *and_ors = NULL;
-//    struct ast_node_and_or *last = NULL;
-//
-//    while ((last = parser_readandor(p)))
-//    {
-//        
-//    }
-    p = p;
-    return NULL;
 }
 
 struct ast_node_do_group *parser_readdogroup(struct parser_s *p)
@@ -299,77 +268,19 @@ struct ast_node_do_group *parser_readdogroup(struct parser_s *p)
 }
 
 
-struct ast_node_element *parser_readelement(struct parser_s *p)
-{
-    struct ast_node_element *element = malloc(sizeof(struct ast_node_element));
-    element->next = NULL;
-
-    if (!(element->word = parser_readword(p))
-        && !(element->redirection = parser_readredirection(p)))
-            return NULL;
-    return element;
-}
-
-struct ast_node_assignement_word *get_assignement_word(struct parser_s *p)
-{
-     struct ast_node_assignement_word *assignement_word
-        = malloc(sizeof(struct ast_node_assignement_word));
-   
-     if (!(assignement_word->var_name = get_word(p))
-        || (!parser_readchar(p, '='))
-        || (!(assignement_word->value = atoi(get_word(p)))))
-        return NULL;
-    return assignement_word;
-}
-
-struct ast_node_assignement_word *parser_readassignementword(struct parser_s *p)
-{
-    struct ast_node_assignement_word *assignement_word = NULL;
-    if (!(assignement_word = get_assignement_word(p)))
-        return NULL;
-
-//    int tmp = p->index;
-//
-//    if (parser_begin_capture(p, "assign") && parser_readidentifier(p)
-//        && parser_end_capture(p, "assign"))
-//        && parser_readchar(p, '=')
-//        && parser_begin_capture(p, "value") && parser_readinteger(p)
-//        && parser_end_capture(p, "value")
-//    {
-//        assignement_word->var_name = parser_get_capture("assign");
-//        assignement_word->value = atoi(parser_get_capture("value"));
-//        assignement_word->next = NULL;
-//        
-//        reinit_capture(p);
-//        return assignement_word;
-//    }
-//    
-//    p->index = tmp;
-
-    struct ast_node_assignement_word *current = assignement_word; 
-    struct ast_node_assignement_word *last = NULL;
-    
-    eat_newlines(p);
-
-    while ((last = get_assignement_word(p)))
-    {
-        current->next = last;
-        current = last;
-        
-        eat_newlines(p);
-    }
-
-    return assignement_word;
-}
 
 struct ast_node_prefix *parser_readprefix(struct parser_s *p)
 {
     struct ast_node_prefix *prefix = malloc(sizeof(struct ast_node_prefix));
-    prefix->next = NULL;
-    if (!(prefix->assignement_word = parser_readassignementword(p))
-        && !(prefix->redirection = parser_readredirection(p)))
-        return NULL;
-    return prefix;
+    p = p;
+    prefix = prefix;
+    return NULL;
+}
+
+struct ast_node_element *parser_readelement(struct parser_s *p)
+{
+    p = p;
+    return NULL;
 }
 
 struct ast_node_simple_command *parser_readsimplecommand(struct parser_s *p)
@@ -408,6 +319,12 @@ struct ast_node_simple_command *parser_readsimplecommand(struct parser_s *p)
     return simple_command;
 }
 
+struct ast_node_compound_list *parser_readcompoundlist(struct parser_s *p)
+{
+    p = p;
+    return NULL;
+}
+
 int get_shell_command_type(char *word)
 {
     size_t index = 0;
@@ -422,76 +339,50 @@ int get_shell_command_type(char *word)
     return VOID;
 }
 
-struct ast_node_word *get_word_list(struct parser_s *p)
-{
-    struct ast_node_word *root = parser_readword(p);
-    if (!root)
-        return NULL;
-
-    struct ast_node_word *word = NULL;
-    struct ast_node_word *last = NULL;
-    word = root;
-
-    while ((last = parser_readword(p)))
-    {
-        word->next = last;
-        word = last;
-    }
-
-    return root;
-}
-
-struct ast_node_else_clause *parser_readelseclause(struct parser_s *p)
-{
-    p = p;
-    return NULL;
-}
-
-struct ast_node_rule_if *parser_readruleif(struct parser_s *p)
-{
-    struct ast_node_rule_if *rule_if =
-        malloc(sizeof(struct ast_node_rule_if));
-
-    rule_if->condition = NULL;
-    rule_if->body = NULL;
-    rule_if->else_clause = NULL;
-
-    if (!(rule_if->condition = parser_readcompoundlist(p))
-        || !(parser_readtext(p, "then"))
-        || !(rule_if->body = parser_readcompoundlist(p)))
-        return NULL;
-    rule_if->else_clause = parser_readelseclause(p);
-    if (!(parser_readtext(p, "fi")))
-        return NULL;
-
-    return rule_if;
-}
-
 struct ast_node_rule_for *parser_readrulefor(struct parser_s *p)
 {
     struct ast_node_rule_for *rule_for =
         malloc(sizeof(struct ast_node_rule_for));
     
-    rule_for->word_list = NULL;
+    rule_for->words = NULL;
     rule_for->do_group = NULL;
 
-    if (!(rule_for->word = parser_readword(p)))
+    if (!parser_readtext(p, "for"))
+        return NULL;
+    
+    if (!(rule_for->word = get_word(p)))
         return NULL;
 
     if (!parser_readchar(p, ';') /* && eat_newlines(p) */)
     {
         eat_newlines(p);
         
-        if (parser_readtext(p, "in"))
+        if (!parser_readtext(p, "in"))
+            return NULL;
+
+        eat_newlines(p);
+
+        char *curr_word = NULL;
+
+        if (!(curr_word = get_word(p)))
+            return NULL;
+
+        struct ast_node_word *words_list = malloc(sizeof(struct ast_node_word));
+        words_list->name = curr_word;
+        words_list->next = NULL;
+
+        while ((curr_word = get_word(p)))
         {
-            rule_for->word_list = get_word_list(p);
-    
-            if (!parser_readchar(p, ';') && !parser_readchar(p, '\n'))
-                return NULL;
+        
         }
-    }   
-    
-    eat_newlines(p);
+
+        if (!parser_readchar(';') && !parser_readchar('\n'))
+            return NULL;
+    }
+    else
+    {
+        eat_newlines(p);
+    }
 
     if (!(rule_for->do_group = parser_readdogroup(p)))
         return NULL;
@@ -528,6 +419,12 @@ struct ast_node_rule_until *parser_readruleuntil(struct parser_s *p)
 }
 
 struct ast_node_rule_case *parser_readrulecase(struct parser_s *p)
+{
+    p = p;
+    return NULL;
+}
+
+struct ast_node_rule_if *parser_readruleif(struct parser_s *p)
 {
     p = p;
     return NULL;
@@ -595,7 +492,7 @@ struct ast_node_funcdec *parser_readfuncdec(struct parser_s *p)
 
     parser_readtext(p, "function");
 
-    if (!((funcdec->word = parser_readword(p)) && parser_readchar(p, '(')
+    if (!((funcdec->word = get_word(p)) && parser_readchar(p, '(')
         && parser_readchar(p, ')')))
         return NULL;     
    
@@ -737,7 +634,6 @@ struct ast_node_list *parser_readlist(struct parser_s *p)
         and_or->linked = c;
         and_or->next = last;
         and_or = last;
-        c = false;
     }
 
     return p->ast->list;

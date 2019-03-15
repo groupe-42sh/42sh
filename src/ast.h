@@ -65,25 +65,26 @@ struct ast_node_command {
     struct ast_node_command *next;
 };
 
-//struct ast_node_command_container {
-//    enum command_type type;
-//    struct ast_node_command *command;
-//    struct ast_node_redirection *redirection;
-//};
-
 struct ast_node_simple_command {
     struct ast_node_element *element_list; 
     struct ast_node_prefix *prefix_list;
 };
 
 struct ast_node_element { 
-    char *word;
+    struct ast_node_word *word;
     struct ast_node_redirection *redirection;
     struct ast_node_element *next;
 };
 
+
+struct ast_node_assignement_word {
+    char *var_name;
+    int value;
+    struct ast_node_assignement_word *next;
+};
+
 struct ast_node_prefix { 
-    char *assignement_word;
+    struct ast_node_assignement_word *assignement_word;
     struct ast_node_redirection *redirection;
     struct ast_node_prefix *next;
 };
@@ -103,12 +104,12 @@ struct ast_node_shell_command {
 };
 
 struct ast_node_funcdec {
-    char *word;
+    struct ast_node_word *word;
     struct ast_node_shell_command *shell_command;
 };
 
 union word_heredoc {
-    char *word;
+    struct ast_node_word *word;
     char *heredoc;
 };
 
@@ -124,8 +125,8 @@ struct ast_node_compound_list {
 };
 
 struct ast_node_rule_for {
-    char *word;
-    char **words;
+    struct ast_node_word *word;
+    struct ast_node_word *word_list;
     struct ast_node_do_group *do_group;
 };
 
@@ -140,8 +141,13 @@ struct ast_node_rule_until {
 };
 
 struct ast_node_rule_case {
-    char *word;
+    struct ast_node_word *word;
     struct ast_node_else_clause *else_clause;
+};
+
+struct ast_node_word {
+    char *str;
+    struct ast_node_word *next;
 };
 
 struct ast_node_rule_if {
@@ -165,8 +171,8 @@ struct ast_node_case_clause {
 };
 
 struct ast_node_case_item {
-    char *word;
-    char **words;
+    struct ast_node_word *word;
+    struct ast_node_word word_list;
     struct ast_node_compound_list *compound_list;
     struct ast_node_case_item *next;
 };

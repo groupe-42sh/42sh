@@ -1,3 +1,8 @@
 o GERER LES ERREURS
 o REVENIR AVANT DE FAIRE DES "RETURN NULL;" (avec p->index = tmp)
-o 
+    (dans les fonctions justement...)
+    solution: renvoyer une fonction au lieu de faire un "return NULL",
+              la ou il y a des erreurs
+o ASSIGNEMENT_WORD + (\n)* + ASSIGNEMENT_WORD
+o INT ET FLOAT DANS ASSIGNEMENT_WORD
+o
