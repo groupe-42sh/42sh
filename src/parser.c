@@ -12,7 +12,7 @@ struct parser_s *parser_new_from_string(const char *text)
     p->capture = test;
     p->capture->next = NULL;
     p->capture->tag = NULL;
-    p->ast = malloc(sizeof(struct ast_node_input));
+    p->ast = NULL;
     p->ast->list = NULL;
     p->error = malloc(sizeof(struct error_s));
     return p;
@@ -98,6 +98,25 @@ int parser_readrange(struct parser_s *p, char begin, char end)
     }
     return 0;
 }
+
+int parser_peekinset(struct parser_s *p, char *set)
+{
+    p->error->type = ON_INSET;
+    p->error->u.inset = set;
+
+    size_t i = 0;
+
+    while (set[i] != '\0')
+    {
+        if (p->input[p->index] == set[i])
+        {
+            return 1;
+        }
+        ++i;
+    }
+    return 0;
+}
+
 
 int parser_readinset(struct parser_s *p, char *set)
 {
@@ -212,9 +231,14 @@ bool is_delimiter(struct parser_s *p)
 {
     //faire correspondre avec enum des TOKEN, boucler renvoyer
     //tu regarde si tu veux la valeur
-    return parser_peekchar(p, ' ') || parser_peekchar(p, '\t') ||
-        parser_peekchar(p, ';') || parser_peekchar(p, '&') || parser_peekchar(p,
-        '\n') || parser_peekchar(p, '(');
+
+    //FAIRE UN READINSET !!!!
+    
+    return parser_readinset(p, " \t\n;&(<>");
+
+//    return parser_peekchar(p, ' ') || parser_peekchar(p, '\t') ||
+//        parser_peekchar(p, ';') || parser_peekchar(p, '&') || parser_peekchar(p,
+//        '\n') || parser_peekchar(p, '(');
 }
 
 bool parser_readidentifier(struct parser_s *p)

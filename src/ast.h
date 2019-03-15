@@ -2,21 +2,25 @@
 #define AST_H
 #include "parser.h"
 
-enum sep {
-    RIEN,
-    POINT_VIRGULE,
-    ESPERLUETTE
+enum shell_command_type
+{
+    VOID,
+    FOR,
+    WHILE,
+    CASE,
+    IF,
+    UNTIL
 };
 
 enum relation {
-    DOUBLE_ESPERLUETTE,
-    DOUBLE_PIPE
+    TOKEN_DOUBLE_AMPERSAND,
+    TOKEN_DOUBLE_PIPE
 };
 
 enum command_type {
     SIMPLE,
     SHELL,
-    FUNDEC
+    FUNCDEC
 };
 
 enum redirection {
@@ -32,7 +36,7 @@ enum redirection {
 };
 
 struct ast_node_input {
-   struct ast_node_list *list; /*1 seule liste*/
+    struct ast_node_list *list; /*1 seule liste*/
 };
 
 struct ast_node_list {
@@ -40,45 +44,51 @@ struct ast_node_list {
 };
 
 struct ast_node_and_or {
-    enum sep separator;
+    bool linked;
     struct ast_node_pipeline *pipeline;
     struct ast_node_and_or *next;
 };
 
 struct ast_node_pipeline {
-    enum relation rel;
-    union ast_node_command *command;
-    bool inverse; /*[!]*/
+    enum relation relation;
+    struct ast_node_command *command;
+    bool reverse; /*[!]*/
+    struct ast_node_pipeline *next;
 };
 
-union ast_node_command {
+struct ast_node_command {
+    bool piped;
     struct ast_node_simple_command *simple_command;/*1 seul*/
-    union ast_node_shell_command *shell_command;/*1 seul*/
-    struct ast_node_fundec *fundec;/*1 seul*/
+    struct ast_node_shell_command *shell_command;/*1 seul*/
+    struct ast_node_funcdec *funcdec;/*1 seul*/
+    struct ast_node_redirection *redirection_list;
+    struct ast_node_command *next;
 };
 
-struct ast_node_command_container {
-    enum command_type type;
-    union ast_node_command *command;
-    struct ast_node_redirection *redirection;
-};
+//struct ast_node_command_container {
+//    enum command_type type;
+//    struct ast_node_command *command;
+//    struct ast_node_redirection *redirection;
+//};
 
 struct ast_node_simple_command {
-    struct ast_node_element *element; 
-    struct ast_node_prefix *prefix;
+    struct ast_node_element *element_list; 
+    struct ast_node_prefix *prefix_list;
 };
 
 struct ast_node_element { 
     char *word;
     struct ast_node_redirection *redirection;
+    struct ast_node_element *next;
 };
 
 struct ast_node_prefix { 
     char *assignement_word;
     struct ast_node_redirection *redirection;
+    struct ast_node_prefix *next;
 };
 
-union ast_node_shell_command {
+union ast_node_shell_command_child {
     struct ast_node_rule_for *_for;
     struct ast_node_rule_while *_while;
     struct ast_node_rule_case *_case;
@@ -87,9 +97,14 @@ union ast_node_shell_command {
     struct ast_node_compound_list *compound_list;
 };
 
-struct ast_node_fundec {
+struct ast_node_shell_command {
+    enum shell_command_type type;   
+    union ast_node_shell_command_child child;
+};
+
+struct ast_node_funcdec {
     char *word;
-    union ast_node_shell_command *command;
+    struct ast_node_shell_command *shell_command;
 };
 
 union word_heredoc {
@@ -98,9 +113,10 @@ union word_heredoc {
 };
 
 struct ast_node_redirection {
-    size_t io_number;
+    int io_number;
     enum redirection redirection_type;
     union word_heredoc word_heredoc;
+    struct ast_node_redirection *next;
 };
 
 struct ast_node_compound_list {
