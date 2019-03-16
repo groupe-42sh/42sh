@@ -5,11 +5,6 @@
 #include "ast.h"
 
 
-int read_input(struct parser_s *p)
-{
-    return parser_readinput(p);
-}
-
 int test(struct parser_s *p)
 {
     p = p;
@@ -20,16 +15,6 @@ int main(int ac, char **av)
 {
     ac = ac;
     av = av;
-    struct parser_s *p = parser_new_from_string("content");
-    
-    int (*pf)(struct parser_s *);
-    pf = &test;
-    
-    p->index = 9;
-    if (plus(pf, p))
-        printf("passed\n");
-    else
-        printf("failed\n");
 
     //etoile(pf, p);
     //interrogation(pf, p);

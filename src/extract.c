@@ -147,15 +147,124 @@ bool parser_read_doublepipe(struct parser_s *p)
   p->index = tmp;
   return false;
 }
+struct ast_node_word *get_word_list(struct parser_s *p)
+{
+    struct ast_node_word *root = parser_readword(p);
+    if (!root)
+        return NULL;
+
+    struct ast_node_word *word = NULL;
+    struct ast_node_word *last = NULL;
+    word = root;
+
+    while ((last = parser_readword(p)))
+    {
+        word->next = last;
+        word = last;
+    }
+
+    return root;
+}
+struct ast_node_rule_if *parser_readruleif(struct parser_s *p)
+{
+    struct ast_node_rule_if *rule_if =
+        malloc(sizeof(struct ast_node_rule_if));
+
+    rule_if->condition = NULL;
+    rule_if->body = NULL;
+    rule_if->else_clause = NULL;
+
+    if (!(rule_if->condition = parser_readcompoundlist(p))
+        || !(parser_readtext(p, "then"))
+        || !(rule_if->body = parser_readcompoundlist(p)))
+        return NULL;
+    rule_if->else_clause = parser_readelseclause(p);
+    if (!(parser_readtext(p, "fi")))
+        return NULL;
+
+    return rule_if;
+}
+
 struct ast_node_rule_for *parser_readrulefor(struct parser_s *p)
 {
-    p = p;
-    return NULL;
+    struct ast_node_rule_for *rule_for =
+        malloc(sizeof(struct ast_node_rule_for));
+    
+    rule_for->word_list = NULL;
+    rule_for->do_group = NULL;
+
+    if (!(rule_for->word = parser_readword(p)))
+        return NULL;
+
+    if (!parser_readchar(p, ';') /* && eat_newlines(p) */)
+    {
+        eat_newlines(p);
+        
+        if (parser_readtext(p, "in"))
+        {
+            rule_for->word_list = get_word_list(p);
+    
+            if (!parser_readchar(p, ';') && !parser_readchar(p, '\n'))
+                return NULL;
+        }
+    }   
+    
+    eat_newlines(p);
+
+    if (!(rule_for->do_group = parser_readdogroup(p)))
+        return NULL;
+
+    return rule_for;
+}
+struct ast_node_assignement_word *get_assignement_word(struct parser_s *p)
+{
+     struct ast_node_assignement_word *assignement_word
+        = malloc(sizeof(struct ast_node_assignement_word));
+   
+     if (!(assignement_word->var_name = get_word(p))
+        || (!parser_readchar(p, '='))
+        || (!(assignement_word->value = atoi(get_word(p)))))
+        return NULL;
+    return assignement_word;
 }
 struct ast_node_assignement_word *parser_readassignementword(struct parser_s *p)
 {
-  struct ast_node_assignement_word *assignement_word= malloc(sizeof(struct ast_node_assignement_word));
-  return NULL;
+    struct ast_node_assignement_word *assignement_word = NULL;
+    if (!(assignement_word = get_assignement_word(p)))
+        return NULL;
+
+//    int tmp = p->index;
+//
+//    if (parser_begin_capture(p, "assign") && parser_readidentifier(p)
+//        && parser_end_capture(p, "assign"))
+//        && parser_readchar(p, '=')
+//        && parser_begin_capture(p, "value") && parser_readinteger(p)
+//        && parser_end_capture(p, "value")
+//    {
+//        assignement_word->var_name = parser_get_capture("assign");
+//        assignement_word->value = atoi(parser_get_capture("value"));
+//        assignement_word->next = NULL;
+//        
+//        reinit_capture(p);
+//        return assignement_word;
+//    }
+//    
+//    p->index = tmp;
+
+    struct ast_node_assignement_word *current = assignement_word; 
+    struct ast_node_assignement_word *last = NULL;
+    
+    eat_newlines(p);
+
+    while ((last = get_assignement_word(p)))
+    {
+        current->next = last;
+        current = last;
+        
+        eat_newlines(p);
+    }
+
+    return assignement_word;
 }
 struct ast_node_word *parser_readword(struct parser_s *p)
 {
@@ -227,7 +336,7 @@ struct ast_node_case_clause *parser_readcaseclause(struct parser_s *p)
   while(parser_readtext(p,";;"))
     {
       eat_newlines(p);
-      if(last_case_item = parser_readcaseitem(p))
+      if((last_case_item = parser_readcaseitem(p)))
 	{
 	  case_item->next = last_case_item;
 	  case_item = last_case_item;
@@ -252,7 +361,7 @@ struct ast_node_rule_case *parser_readrulecase(struct parser_s *p)
   return rule_case;
   
 }
-struct ast_node_else_clause *parser_elseclause(struct parser_s *p)
+struct ast_node_else_clause *parser_readelseclause(struct parser_s *p)
 {
   struct ast_node_else_clause *else_clause = malloc(sizeof(struct ast_node_else_clause));
   else_clause->second = NULL; 
@@ -262,15 +371,10 @@ struct ast_node_else_clause *parser_elseclause(struct parser_s *p)
   if(parser_readtext(p,"elif") && (else_clause->first = parser_readcompoundlist(p)) &&
      parser_readtext(p,"then") && (else_clause->second = parser_readcompoundlist(p)))
     {
-      else_clause->else_clause = parser_elseclause(p);
+      else_clause->else_clause = parser_readelseclause(p);
       return else_clause;
     }
   return NULL;
-}
-struct ast_node_rule_if *parser_readruleif(struct parser_s *p)
-{
-    p = p;
-    return NULL;
 }
 struct ast_node_do_group *parser_readdogroup(struct parser_s *p)
 {
@@ -602,8 +706,7 @@ struct ast_node_list *parser_readlist (struct parser_s *p)
     if (!(and_or = parser_readandor(p)))
       return NULL;
     p->ast->list->and_ors = and_or;
-    struct ast_node_and_or *last;
-    last = NULL;
+    struct ast_node_and_or *last = NULL;
     bool c = false;
     while((parser_readchar(p,';')||(c=(parser_readchar(p,'&')))) && (last = parser_readandor(p)))
       {
@@ -629,36 +732,4 @@ bool parser_readinput (struct parser_s *p)
         return true;
     p->index = tmp;
     return false;
-}
-
-bool etoile(int(func(struct parser_s *)), struct parser_s *p)
-{
-    int r = 1;
-    while(r == 1)
-        r = func(p);
-    if (r == -1)
-        return false;
-    return true;
-}
-
-bool plus(int(func(struct parser_s *)), struct parser_s *p)
-{
-    int r = -1;
-    r = func(p);
-    if (r)
-    {
-        while (r == 1)
-            r = func(p);
-        if (r == -1)
-            return false;
-        return true;
-    }
-    return false;
-}
-
-bool interrogation(int(func(struct parser_s *)), struct parser_s *p)
-{
-    if (func(p) == -1)
-        return false;
-    return true;
 }
