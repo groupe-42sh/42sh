@@ -5,15 +5,15 @@
 
 struct capture_s
 {
-    int begin;
-    int end;
+  int begin;
+  int end;
 };
 
 struct list_capt_s
 {
-    const char *tag; 
-    struct capture_s capt;
-    struct list_capt_s *next;
+  const char *tag; 
+  struct capture_s capt;
+  struct list_capt_s *next;
 };
 
 int read_Assign(struct parser_s *p);

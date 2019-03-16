@@ -55,6 +55,6 @@ int parser_readoutset(struct parser_s *p, char *set);
 bool parser_readeol(struct parser_s *p);
 bool parser_readidentifier(struct parser_s *p);
 bool parser_readinteger(struct parser_s *p);
-
+int parser_peekinset(struct parser_s *p, char *set);
 int read_closebracket(struct parser_s *p);
 #endif
