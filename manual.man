@@ -1,0 +1,16 @@
+.TH NAME
+	42sh
+
+AUTHORS
+	Slimane A
+	Diawara M
+	Homand L
+	Benelguemar Y
+	Ndiaye M-A
+
+DESCRIPTION
+	42sh is a shell that interprets and executes commands read from the
+	standard input or from a file. 42sh is implemented in C Language.
+
+SYNOPSIS
+	42 [OPTIONS] [FILE]

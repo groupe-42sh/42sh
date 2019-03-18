@@ -1,0 +1,3 @@
+/home/mah/42sh/src/build/CMakeFiles/edit_cache.dir
+/home/mah/42sh/src/build/CMakeFiles/rebuild_cache.dir
+/home/mah/42sh/src/build/CMakeFiles/ini.dir

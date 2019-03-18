@@ -1,0 +1,29 @@
+.TH lana-42sh 7 "2018-03-17" v.03 "lana-42sh man page"
+
+.SH NAME
+lana-42sh \-\- بواسطة وللأصحاب
+.SH DESCRIPTION
+lana-42sh est le meilleur 42sh, sans déconner. Pas besoin d'en faire des tonnes.
+
+.SH OPTIONS
+\-c     Je ne sais plus
+.IP     \-\-ast\-print
+print the AST
+.SH AUTHORS
+    Slimane A           amar.slimane
+    Diawara M           madimodi.diawara
+    Homand L            homand_l
+    Benelguemar Y       youcef.benelguemar
+    Ndiaye M-A          mah-aminata.ndiaye
+
+.SH DESCRIPTION
+42sh is a shell that interprets and executes commands read from the
+standard input or from a file. 42sh is implemented in C Language.
+
+.SH SYNOPSIS
+42 [OPTIONS] [FILE]
+
+.SH COMMANDS DETAILS
+\--ast-print,   Print the AST
+    --> to get a PNG : dot Tpng -O file_name
+    --> or just :      dot file_name

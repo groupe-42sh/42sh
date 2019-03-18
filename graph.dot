@@ -1,0 +1,5 @@
+digraph our_graph {
+	INPUT0x6c5060 -> LIST0x6c5080;
+LIST0x6c5080 -> AND_OR0x6c50a0;
+
+}
