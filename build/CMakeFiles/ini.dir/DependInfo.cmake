@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/mah/42sh/src/ast.c" "/home/mah/42sh/src/build/CMakeFiles/ini.dir/ast.c.o"
-  "/home/mah/42sh/src/extract.c" "/home/mah/42sh/src/build/CMakeFiles/ini.dir/extract.c.o"
-  "/home/mah/42sh/src/ini.c" "/home/mah/42sh/src/build/CMakeFiles/ini.dir/ini.c.o"
-  "/home/mah/42sh/src/parser.c" "/home/mah/42sh/src/build/CMakeFiles/ini.dir/parser.c.o"
+  "/home/mah/42sh/src/ast.c" "/home/mah/42sh/build/CMakeFiles/ini.dir/src/ast.c.o"
+  "/home/mah/42sh/src/extract.c" "/home/mah/42sh/build/CMakeFiles/ini.dir/src/extract.c.o"
+  "/home/mah/42sh/src/ini.c" "/home/mah/42sh/build/CMakeFiles/ini.dir/src/ini.c.o"
+  "/home/mah/42sh/src/parser.c" "/home/mah/42sh/build/CMakeFiles/ini.dir/src/parser.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

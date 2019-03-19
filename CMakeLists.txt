@@ -3,16 +3,16 @@ project(42sh)
 
 # Création de variables avec les fichiers à compiler
 set(SRCS
-	ast.c
-	extract.c
-	parser.c
-	ini.c
+	src/ast.c
+	src/extract.c
+	src/parser.c
+	src/ini.c
 	)
 
 set(HEADERS
-	ast.h
-	extract.h
-	parser.h
+	src/ast.h
+	src/extract.h
+	src/parser.h
 	)
 
 # On indique que l'on souhaite obtenir un executable "parser" compilé à partir des fichiers décrits par les variables créées plus haut

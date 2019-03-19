@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ini.dir/ast.c.o"
-  "CMakeFiles/ini.dir/extract.c.o"
-  "CMakeFiles/ini.dir/parser.c.o"
-  "CMakeFiles/ini.dir/ini.c.o"
+  "CMakeFiles/ini.dir/src/ast.c.o"
+  "CMakeFiles/ini.dir/src/extract.c.o"
+  "CMakeFiles/ini.dir/src/parser.c.o"
+  "CMakeFiles/ini.dir/src/ini.c.o"
   "ini.pdb"
   "ini"
 )

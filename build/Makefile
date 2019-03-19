@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mah/42sh/src
+CMAKE_SOURCE_DIR = /home/mah/42sh
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mah/42sh/src/build
+CMAKE_BINARY_DIR = /home/mah/42sh/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/src/build/CMakeFiles /home/mah/42sh/src/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/build/CMakeFiles /home/mah/42sh/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/src/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,113 +123,113 @@ ini/fast:
 	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/build
 .PHONY : ini/fast
 
-ast.o: ast.c.o
+src/ast.o: src/ast.c.o
 
-.PHONY : ast.o
-
-# target to build an object file
-ast.c.o:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/ast.c.o
-.PHONY : ast.c.o
-
-ast.i: ast.c.i
-
-.PHONY : ast.i
-
-# target to preprocess a source file
-ast.c.i:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/ast.c.i
-.PHONY : ast.c.i
-
-ast.s: ast.c.s
-
-.PHONY : ast.s
-
-# target to generate assembly for a file
-ast.c.s:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/ast.c.s
-.PHONY : ast.c.s
-
-extract.o: extract.c.o
-
-.PHONY : extract.o
+.PHONY : src/ast.o
 
 # target to build an object file
-extract.c.o:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/extract.c.o
-.PHONY : extract.c.o
+src/ast.c.o:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/ast.c.o
+.PHONY : src/ast.c.o
 
-extract.i: extract.c.i
+src/ast.i: src/ast.c.i
 
-.PHONY : extract.i
+.PHONY : src/ast.i
 
 # target to preprocess a source file
-extract.c.i:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/extract.c.i
-.PHONY : extract.c.i
+src/ast.c.i:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/ast.c.i
+.PHONY : src/ast.c.i
 
-extract.s: extract.c.s
+src/ast.s: src/ast.c.s
 
-.PHONY : extract.s
+.PHONY : src/ast.s
 
 # target to generate assembly for a file
-extract.c.s:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/extract.c.s
-.PHONY : extract.c.s
+src/ast.c.s:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/ast.c.s
+.PHONY : src/ast.c.s
 
-ini.o: ini.c.o
+src/extract.o: src/extract.c.o
 
-.PHONY : ini.o
+.PHONY : src/extract.o
 
 # target to build an object file
-ini.c.o:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/ini.c.o
-.PHONY : ini.c.o
+src/extract.c.o:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/extract.c.o
+.PHONY : src/extract.c.o
 
-ini.i: ini.c.i
+src/extract.i: src/extract.c.i
 
-.PHONY : ini.i
+.PHONY : src/extract.i
 
 # target to preprocess a source file
-ini.c.i:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/ini.c.i
-.PHONY : ini.c.i
+src/extract.c.i:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/extract.c.i
+.PHONY : src/extract.c.i
 
-ini.s: ini.c.s
+src/extract.s: src/extract.c.s
 
-.PHONY : ini.s
+.PHONY : src/extract.s
 
 # target to generate assembly for a file
-ini.c.s:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/ini.c.s
-.PHONY : ini.c.s
+src/extract.c.s:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/extract.c.s
+.PHONY : src/extract.c.s
 
-parser.o: parser.c.o
+src/ini.o: src/ini.c.o
 
-.PHONY : parser.o
+.PHONY : src/ini.o
 
 # target to build an object file
-parser.c.o:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/parser.c.o
-.PHONY : parser.c.o
+src/ini.c.o:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/ini.c.o
+.PHONY : src/ini.c.o
 
-parser.i: parser.c.i
+src/ini.i: src/ini.c.i
 
-.PHONY : parser.i
+.PHONY : src/ini.i
 
 # target to preprocess a source file
-parser.c.i:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/parser.c.i
-.PHONY : parser.c.i
+src/ini.c.i:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/ini.c.i
+.PHONY : src/ini.c.i
 
-parser.s: parser.c.s
+src/ini.s: src/ini.c.s
 
-.PHONY : parser.s
+.PHONY : src/ini.s
 
 # target to generate assembly for a file
-parser.c.s:
-	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/parser.c.s
-.PHONY : parser.c.s
+src/ini.c.s:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/ini.c.s
+.PHONY : src/ini.c.s
+
+src/parser.o: src/parser.c.o
+
+.PHONY : src/parser.o
+
+# target to build an object file
+src/parser.c.o:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/parser.c.o
+.PHONY : src/parser.c.o
+
+src/parser.i: src/parser.c.i
+
+.PHONY : src/parser.i
+
+# target to preprocess a source file
+src/parser.c.i:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/parser.c.i
+.PHONY : src/parser.c.i
+
+src/parser.s: src/parser.c.s
+
+.PHONY : src/parser.s
+
+# target to generate assembly for a file
+src/parser.c.s:
+	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/src/parser.c.s
+.PHONY : src/parser.c.s
 
 # Help Target
 help:
@@ -240,18 +240,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ini"
-	@echo "... ast.o"
-	@echo "... ast.i"
-	@echo "... ast.s"
-	@echo "... extract.o"
-	@echo "... extract.i"
-	@echo "... extract.s"
-	@echo "... ini.o"
-	@echo "... ini.i"
-	@echo "... ini.s"
-	@echo "... parser.o"
-	@echo "... parser.i"
-	@echo "... parser.s"
+	@echo "... src/ast.o"
+	@echo "... src/ast.i"
+	@echo "... src/ast.s"
+	@echo "... src/extract.o"
+	@echo "... src/extract.i"
+	@echo "... src/extract.s"
+	@echo "... src/ini.o"
+	@echo "... src/ini.i"
+	@echo "... src/ini.s"
+	@echo "... src/parser.o"
+	@echo "... src/parser.i"
+	@echo "... src/parser.s"
 .PHONY : help
 
 

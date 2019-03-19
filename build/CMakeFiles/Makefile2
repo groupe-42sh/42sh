@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mah/42sh/src
+CMAKE_SOURCE_DIR = /home/mah/42sh
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mah/42sh/src/build
+CMAKE_BINARY_DIR = /home/mah/42sh/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/ini.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/mah/42sh/src/build
 CMakeFiles/ini.dir/all:
 	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/depend
 	$(MAKE) -f CMakeFiles/ini.dir/build.make CMakeFiles/ini.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mah/42sh/src/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target ini"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mah/42sh/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target ini"
 .PHONY : CMakeFiles/ini.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/ini.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ini.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/src/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ini.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/src/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mah/42sh/build/CMakeFiles 0
 .PHONY : CMakeFiles/ini.dir/rule
 
 # Convenience name for target.
