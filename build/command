@@ -1,1 +1,9 @@
-a = 5
+if a; then echo salut;fi
+
+case d:
+    AZ) echo blal
+    tt) rm gp;;
+esac
+
+while r; do mkdir po;
+done
