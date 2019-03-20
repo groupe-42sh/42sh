@@ -190,10 +190,10 @@ bool is_delimiter(struct parser_s *p)
 {
     //faire correspondre avec enum des TOKEN, boucler renvoyer
     //tu regarde si tu veux la valeur
-    return parser_peekchar(p, ' ') || parser_peekchar(p, '\t') ||
-        parser_peekchar(p, ';') || parser_peekchar(p, '&')
+    return parser_peekchar(p, ' ') || parser_peekchar(p, '\t')
+        || parser_peekchar(p, ';') || parser_peekchar(p, '&')
         || parser_peekchar(p,'\n') || parser_peekchar(p, '(')
-        || parser_peekchar(p,EOF)|| parser_peekchar(p, '\0')
+        || parser_peekchar(p,EOF) || parser_peekchar(p, '\0')
         || parser_peekchar(p, ')') || parser_peekchar(p, '=')
         || parser_peekchar(p, '|') || parser_peektext(p,"&&")
         || parser_peektext(p,"||");
@@ -205,8 +205,7 @@ bool parser_readidentifier(struct parser_s *p)
     {
         while (!is_delimiter(p))
         {
-            if (!(read_min(p) || read_maj(p)
-                        || read_underscore(p) || read_digit(p)))
+            if (!(read_min(p) || read_maj(p) || read_underscore(p) || read_digit(p)))
                 return false;
         }
         return true;
