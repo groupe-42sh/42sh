@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/ini.dir/src/ast.c.o CMakeFiles/ini.dir/src/extract.c.o CMakeFiles/ini.dir/src/parser.c.o CMakeFiles/ini.dir/src/ini.c.o  -o ini -rdynamic 

@@ -1,0 +1,3 @@
+/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/rebuild_cache.dir
+/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/edit_cache.dir
+/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir
