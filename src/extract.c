@@ -70,6 +70,7 @@ struct ast_node_rule_if *parser_readruleif (struct parser_s *p)
     rule_if->condition = NULL;
     rule_if->body = NULL;
     rule_if->else_clause = NULL;
+
     if (!(rule_if->condition = parser_readcompoundlist(p))
         || !(parser_readtext(p, "then"))
         || !(rule_if->body = parser_readcompoundlist(p)))

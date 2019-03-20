@@ -1,1 +1,0 @@
-/usr/bin/cc     CMakeFiles/42sh.dir/src/ast.c.o CMakeFiles/42sh.dir/src/extract.c.o CMakeFiles/42sh.dir/src/parser.c.o CMakeFiles/42sh.dir/src/ini.c.o  -o 42sh -rdynamic 

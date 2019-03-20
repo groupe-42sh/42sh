@@ -5,23 +5,6 @@
 #include <stdio.h>
 #include "print_ast.h"
 
-
-//enum node {
-//    NODE_VOID,
-//    NODE_INPUT,
-//    AND_OR,
-//    PIPELINE,
-//    COMMAND,
-//    SHELL_COMMAND,
-//    SIMPLE_COMMANDE,  
-//    FUNCDEC,
-//    ASSIGNEMENT_WORD,
-//    WORD,
-//    CASE_ITEM,
-//    COMPOUND_LIST
-//
-//}
-
 void *voidifier(void *ptr)
 {
     return ptr;
@@ -34,23 +17,17 @@ int tab [24] = {0};
 void assignement_word_traversal_print
     (struct ast_node_assignement_word *assignement_word)
 {
-    printf("ASSIGNEMENT_VAR = %s\n", assignement_word->var_name);
-    printf("ASSIGNEMENT_VALUE = %d\n", assignement_word->value);
-
     fprintf(file, "ASSIGN_WORD%d -> VAR%d -> %s;\n", tab[19], ++tab[24], assignement_word->var_name);
     fprintf(file, "ASSIGN_WORD%d -> VALUE%d -> %d;\n", tab[19], ++tab[25], assignement_word->value);
 }
 
 void word_traversal_print(struct ast_node_word *word)
 {
-    printf("WORD: %s\n", word->str);
-    fprintf(file, "WORD%d -> %s;\n", tab[16], word->str);
+    fprintf(file, "WORD%d -> %s_%d;\n", tab[16], word->str, tab[16]);
 }
 
 void case_item_traversal_print(struct ast_node_case_item *case_item)
 {
-    printf("CASE_ITEM:\n");
-
     struct ast_node_word *word_list = case_item->word_list;
     struct ast_node_compound_list *compound_list = case_item->compound_list;
 
@@ -70,8 +47,6 @@ void case_item_traversal_print(struct ast_node_case_item *case_item)
 
 void case_clause_traversal_print(struct ast_node_case_clause *case_clause)
 {
-    printf("CASE_CLAUSE:\n");
-
     struct ast_node_case_item *list = case_clause->list;
 
     while (list)
@@ -84,8 +59,6 @@ void case_clause_traversal_print(struct ast_node_case_clause *case_clause)
 
 void do_group_traversal_print(struct ast_node_do_group *do_group)
 {
-    printf("DO_GROUP:\n");
-
     struct ast_node_compound_list *compound_list = do_group->compound_list;
 
     fprintf(file, "DO_GROUP%d -> COMPOUND_LIST%d;\n", ++tab[21], ++tab[18]);
@@ -94,8 +67,6 @@ void do_group_traversal_print(struct ast_node_do_group *do_group)
 
 void else_clause_traversal_print(struct ast_node_else_clause *else_clause)
 {
-    printf("ELSE_CLAUSE:\n");
-
     struct ast_node_compound_list *first = else_clause->first;
     struct ast_node_compound_list *second = else_clause->second;
     struct ast_node_else_clause *elseclause = else_clause->else_clause;
@@ -117,8 +88,6 @@ void else_clause_traversal_print(struct ast_node_else_clause *else_clause)
 
 void rule_if_traversal_print(struct ast_node_rule_if *_if)
 {
-    printf("IF:\n");
-
     struct ast_node_compound_list *condition = _if->condition;
     struct ast_node_compound_list *body = _if->body;
     struct ast_node_else_clause *else_clause = _if->else_clause;
@@ -137,8 +106,6 @@ void rule_if_traversal_print(struct ast_node_rule_if *_if)
 
 void rule_case_traversal_print(struct ast_node_rule_case *_case)
 {
-    printf("CASE:\n");
-
     struct ast_node_word *word = _case->word;
     struct ast_node_case_clause *case_clause = _case->case_clause;
 
@@ -153,7 +120,6 @@ void rule_case_traversal_print(struct ast_node_rule_case *_case)
 
 void rule_until_traversal_print(struct ast_node_rule_until *_until)
 {
-    printf("UNTIL\n");
     struct ast_node_compound_list *compound_list = _until->compound_list;
     struct ast_node_do_group *do_group = _until->do_group;
 
@@ -165,7 +131,6 @@ void rule_until_traversal_print(struct ast_node_rule_until *_until)
 
 void rule_while_traversal_print(struct ast_node_rule_while *_while)
 {
-    printf("WHILE\n");
     struct ast_node_compound_list *compound_list = _while->compound_list;
     struct ast_node_do_group *do_group = _while->do_group;
 
@@ -177,7 +142,6 @@ void rule_while_traversal_print(struct ast_node_rule_while *_while)
 
 void rule_for_traversal_print(struct ast_node_rule_for *_for)
 {
-    printf("FOR:\n");
     struct ast_node_word *word = _for->word;
     struct ast_node_word *word_list = _for->word_list;
     struct ast_node_do_group *do_group = _for->do_group;
@@ -198,7 +162,6 @@ void rule_for_traversal_print(struct ast_node_rule_for *_for)
 
 void element_traversal_print(struct ast_node_element* element)
 {
-    printf("ELEMENT:\n");
     struct ast_node_word *word = element->word;
     struct ast_node_redirection *redirection = element->redirection;
 
@@ -218,7 +181,6 @@ void element_traversal_print(struct ast_node_element* element)
 
 void prefix_traversal_print(struct ast_node_prefix* prefix)
 {
-    printf("PREFIX:\n");
     struct ast_node_assignement_word *assignement_word =
         prefix->assignement_word;
     struct ast_node_redirection *redirection = prefix->redirection;
@@ -239,8 +201,6 @@ void prefix_traversal_print(struct ast_node_prefix* prefix)
 
 void compound_list_traversal_print(struct ast_node_compound_list *compound_list)
 {
-    printf("COMPOUND_LIST\n");
-
     struct ast_node_and_or *and_or = compound_list->and_or;
 
     while (and_or)
@@ -253,59 +213,41 @@ void compound_list_traversal_print(struct ast_node_compound_list *compound_list)
 
 void redirection_traversal_print(struct ast_node_redirection *redirection)
 {
-    printf("IO_NUMBER : %d\n", redirection->io_number);
-    printf("REDIRECTION :\n");
-
     fprintf(file, "REDIRECTION%d -> IO_NUMBER%d;\n", tab[5],
         redirection->io_number);
 
     switch (redirection->redirection_type)
     {
         case GT:
-            printf(">\n");
             fprintf(file, "REDIRECTION%d -> >;\n", tab[5]);
             break;
         case LT:
-            printf("<\n");
             fprintf(file, "REDIRECTION%d -> <;\n", tab[5]);
             break;
         case GTGT:
-            printf(">>\n");
             fprintf(file, "REDIRECTION%d -> >>;\n", tab[5]);
             break;
         case LTLT:
-            printf("<<\n");
             fprintf(file, "REDIRECTION%d -> <<;\n", tab[5]);
             break;
         case LTLTDASH:
-            printf("<<-\n");
             fprintf(file, "REDIRECTION%d -> <<-;\n", tab[5]);
             break;
         case GTESP:
-            printf(">&\n");
             fprintf(file, "REDIRECTION%d -> >&;\n", tab[5]);
             break;
         case LTESP:
-            printf("<&\n");
             fprintf(file, "REDIRECTION%d -> <&;\n", tab[5]);
             break;
         case GTPIPE:
-            printf(">|\n");
             fprintf(file, "REDIRECTION%d -> >|;\n", tab[5]);
             break;
         case LTGT:
-            printf("<>\n");
             fprintf(file, "REDIRECTION%d -> <>;\n", tab[5]);
             break;
         default:
             printf("NON");
     }
-
-    printf("WORD_HEREDOC : ");
-    if (redirection->word_heredoc.word)
-        printf("%s\n", redirection->word_heredoc.word->str);
-    if (redirection->word_heredoc.heredoc)
-        printf("\"%s\"\n", redirection->word_heredoc.heredoc);
 
     if (redirection->word_heredoc.word)
         fprintf(file, "REDIRECTION%d -> WORD:%s;\n", tab[5],
@@ -317,7 +259,6 @@ void redirection_traversal_print(struct ast_node_redirection *redirection)
 
 void shell_command_traversal_print(struct ast_node_shell_command *shell_command)
 {
-    printf("SHELL_COMMAND\n");
     enum shell_command_type type = shell_command->type;
 
     switch (type)
@@ -352,7 +293,6 @@ void shell_command_traversal_print(struct ast_node_shell_command *shell_command)
 
 void funcdec_traversal_print(struct ast_node_funcdec *funcdec)
 {
-    printf("FUNCDEC\n");
     fprintf(file, "FUNCDEC%d -> SHELL_COMMAND%d;\n", tab[9], ++tab[10]);
     word_traversal_print(funcdec->word);
     shell_command_traversal_print(funcdec->shell_command);
@@ -360,7 +300,6 @@ void funcdec_traversal_print(struct ast_node_funcdec *funcdec)
 
 void simple_command_traversal_print(struct ast_node_simple_command *simple_command)
 {
-    printf("SIMPLE_COMMAND\n");
     struct ast_node_element *element_list = simple_command->element_list;
     struct ast_node_prefix *prefix_list = simple_command->prefix_list;
 
@@ -381,8 +320,6 @@ void simple_command_traversal_print(struct ast_node_simple_command *simple_comma
 
 void command_traversal_print(struct ast_node_command *command)
 {
-    printf("COMMAND\n");
-
     struct ast_node_simple_command *simple_command = command->simple_command;
     struct ast_node_shell_command *shell_command = command->shell_command;
     struct ast_node_funcdec *funcdec = command->funcdec;
@@ -424,7 +361,6 @@ void pipeline_traversal_print(struct ast_node_pipeline *pipeline)
 {
     if (pipeline->reverse)
         printf("! ");
-    printf("PIPELINE\n");
     struct ast_node_command *command = pipeline->command;
 
     while (command)
@@ -437,7 +373,6 @@ void pipeline_traversal_print(struct ast_node_pipeline *pipeline)
 
 void and_or_traversal_print(struct ast_node_and_or *and_or)
 {
-    printf("AND_OR");
     if (and_or->linked)
         printf(" &&\n");
     else
@@ -454,7 +389,6 @@ void and_or_traversal_print(struct ast_node_and_or *and_or)
         pipeline_traversal_print(pipeline);
         pipeline = pipeline->next;
     }
-
 }
 
 void list_traversal_print(struct ast_node_list *list)
