@@ -21,6 +21,9 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
 
     FILE *inifile = fopen(av[argi], "rb");
+    if (!inifile)
+        exit(EXIT_FAILURE);
+
     fseek(inifile, 0, SEEK_END);
     long fsize = ftell(inifile);
     fseek(inifile, 0, SEEK_SET);

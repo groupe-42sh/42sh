@@ -5,7 +5,11 @@
 
 int opt_parse(int argv, char *argc[], int *argi, struct options *options)
 {
+    if (!argc[*argi])
+        return 0;
+
     unsigned mult_char_opt = 1;
+
     if (argc[*argi][0] == '-' && argc[*argi][1] == '-')
     {
         for(; *argi < argv && mult_char_opt; *argi += 1)
@@ -22,7 +26,6 @@ int opt_parse(int argv, char *argc[], int *argi, struct options *options)
             }
             else if (!strcmp(argc[*argi], "--ast-print"))
             {
-                puts("\"--ast-print\" option not implemented yet");
                 options->print = 1;
             }
             else
