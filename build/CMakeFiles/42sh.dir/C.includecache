@@ -57,6 +57,20 @@ ast.h
 /home/k-ou/amar.slimane-42sh-apping/src/ast.h
 print_ast.h
 /home/k-ou/amar.slimane-42sh-apping/src/print_ast.h
+opt-parser.h
+/home/k-ou/amar.slimane-42sh-apping/src/opt-parser.h
+
+/home/k-ou/amar.slimane-42sh-apping/src/opt-parser.c
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+opt-parser.h
+/home/k-ou/amar.slimane-42sh-apping/src/opt-parser.h
+
+/home/k-ou/amar.slimane-42sh-apping/src/opt-parser.h
 
 /home/k-ou/amar.slimane-42sh-apping/src/parser.c
 stdlib.h
@@ -71,6 +85,20 @@ extract.h
 /home/k-ou/amar.slimane-42sh-apping/src/parser.h
 stddef.h
 -
+
+/home/k-ou/amar.slimane-42sh-apping/src/print_ast.c
+ast.h
+/home/k-ou/amar.slimane-42sh-apping/src/ast.h
+parser.h
+/home/k-ou/amar.slimane-42sh-apping/src/parser.h
+extract.h
+/home/k-ou/amar.slimane-42sh-apping/src/extract.h
+stdlib.h
+-
+stdio.h
+-
+print_ast.h
+/home/k-ou/amar.slimane-42sh-apping/src/print_ast.h
 
 /home/k-ou/amar.slimane-42sh-apping/src/print_ast.h
 

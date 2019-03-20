@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "opt-parser.h"
 
-int opt_parse(int argv, char *argc[], int *argi)
+int opt_parse(int argv, char *argc[], int *argi, struct options *options)
 {
     unsigned mult_char_opt = 1;
     if (argc[*argi][0] == '-' && argc[*argi][1] == '-')
@@ -11,14 +11,20 @@ int opt_parse(int argv, char *argc[], int *argi)
         for(; *argi < argv && mult_char_opt; *argi += 1)
         {
             if (!strcmp(argc[*argi], "--version"))
-                puts("Version 0.3");	
-
+            {
+                puts("Version 0.3");
+                options->version = 1;
+            }
             else if (!strcmp(argc[*argi], "--norc"))
-                puts("\"--norc\" option not implemented yet");	
-
+            {
+                puts("\"--norc\" option not implemented yet");
+                options->norc = 1;
+            }
             else if (!strcmp(argc[*argi], "--ast-print"))
+            {
                 puts("\"--ast-print\" option not implemented yet");
-
+                options->print = 1;
+            }
             else
             {
                 puts("Invalid multi-character option");
@@ -33,24 +39,23 @@ int opt_parse(int argv, char *argc[], int *argi)
             *argi += 1)
     {
         if (!strcmp(argc[*argi], "-c"))
-            puts("\"-c\" option not implemented yet");	
-
+        {
+            puts("\"-c\" option not implemented yet");
+            options->c = 1;
+        }
         else if (!strcmp(argc[*argi], "-0") || !strcmp(argc[*argi], "+0"))
+        {
             puts("\"[-+]0\" option not implemented yet");
 
+            options->min_zero = (argc[*argi][0] == '-' ? 1 : 0);
+            options->plus_zero = !options->min_zero;
+        }
         else
         {
             puts("Invalid option");
             return 1;
-        }	
+        }
     }
 
     return 0;
-}
-
-
-int main(int argc, char *argv[])
-{
-    int argi = 0;
-    opt_parse(argc, argv, &argi);
 }

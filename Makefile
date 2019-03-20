@@ -204,6 +204,33 @@ src/ini.c.s:
 	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ini.c.s
 .PHONY : src/ini.c.s
 
+src/opt-parser.o: src/opt-parser.c.o
+
+.PHONY : src/opt-parser.o
+
+# target to build an object file
+src/opt-parser.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/opt-parser.c.o
+.PHONY : src/opt-parser.c.o
+
+src/opt-parser.i: src/opt-parser.c.i
+
+.PHONY : src/opt-parser.i
+
+# target to preprocess a source file
+src/opt-parser.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/opt-parser.c.i
+.PHONY : src/opt-parser.c.i
+
+src/opt-parser.s: src/opt-parser.c.s
+
+.PHONY : src/opt-parser.s
+
+# target to generate assembly for a file
+src/opt-parser.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/opt-parser.c.s
+.PHONY : src/opt-parser.c.s
+
 src/parser.o: src/parser.c.o
 
 .PHONY : src/parser.o
@@ -231,6 +258,33 @@ src/parser.c.s:
 	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/parser.c.s
 .PHONY : src/parser.c.s
 
+src/print_ast.o: src/print_ast.c.o
+
+.PHONY : src/print_ast.o
+
+# target to build an object file
+src/print_ast.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/print_ast.c.o
+.PHONY : src/print_ast.c.o
+
+src/print_ast.i: src/print_ast.c.i
+
+.PHONY : src/print_ast.i
+
+# target to preprocess a source file
+src/print_ast.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/print_ast.c.i
+.PHONY : src/print_ast.c.i
+
+src/print_ast.s: src/print_ast.c.s
+
+.PHONY : src/print_ast.s
+
+# target to generate assembly for a file
+src/print_ast.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/print_ast.c.s
+.PHONY : src/print_ast.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -249,9 +303,15 @@ help:
 	@echo "... src/ini.o"
 	@echo "... src/ini.i"
 	@echo "... src/ini.s"
+	@echo "... src/opt-parser.o"
+	@echo "... src/opt-parser.i"
+	@echo "... src/opt-parser.s"
 	@echo "... src/parser.o"
 	@echo "... src/parser.i"
 	@echo "... src/parser.s"
+	@echo "... src/print_ast.o"
+	@echo "... src/print_ast.i"
+	@echo "... src/print_ast.s"
 .PHONY : help
 
 

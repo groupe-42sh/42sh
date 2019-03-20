@@ -14,11 +14,21 @@ CMakeFiles/42sh.dir/src/extract.c.o: ../src/parser.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/ast.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/extract.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/ini.c
+CMakeFiles/42sh.dir/src/ini.c.o: ../src/opt-parser.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/parser.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/print_ast.h
+
+CMakeFiles/42sh.dir/src/opt-parser.c.o: ../src/opt-parser.c
+CMakeFiles/42sh.dir/src/opt-parser.c.o: ../src/opt-parser.h
 
 CMakeFiles/42sh.dir/src/parser.c.o: ../src/ast.h
 CMakeFiles/42sh.dir/src/parser.c.o: ../src/extract.h
 CMakeFiles/42sh.dir/src/parser.c.o: ../src/parser.c
 CMakeFiles/42sh.dir/src/parser.c.o: ../src/parser.h
+
+CMakeFiles/42sh.dir/src/print_ast.c.o: ../src/ast.h
+CMakeFiles/42sh.dir/src/print_ast.c.o: ../src/extract.h
+CMakeFiles/42sh.dir/src/print_ast.c.o: ../src/parser.h
+CMakeFiles/42sh.dir/src/print_ast.c.o: ../src/print_ast.c
+CMakeFiles/42sh.dir/src/print_ast.c.o: ../src/print_ast.h
 

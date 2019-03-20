@@ -4,6 +4,7 @@
 #include "extract.h"
 #include "ast.h"
 #include "print_ast.h"
+#include "opt-parser.h"
 
 int test(struct parser_s *p)
 {
@@ -13,8 +14,13 @@ int test(struct parser_s *p)
 
 int main(int ac, char **av)
 {
-    ac = ac;
-    FILE *inifile = fopen(av[1], "rb");
+    int argi = 1;
+    struct options options = { 0 };
+
+    if (opt_parse(ac, av, &argi, &options))
+        exit(EXIT_FAILURE);
+
+    FILE *inifile = fopen(av[argi], "rb");
     fseek(inifile, 0, SEEK_END);
     long fsize = ftell(inifile);
     fseek(inifile, 0, SEEK_SET);
@@ -27,7 +33,9 @@ int main(int ac, char **av)
     if (parser_readinput(p))
     {
         puts("parsing success");
-        full_traversal_print(p);
+
+        if (options.print)
+            full_traversal_print(p);
     }
     else
     {

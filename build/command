@@ -1,1 +1,2 @@
-a = 5
+if ls; then echo rt; fi;
+if a; then blabla; fi;
