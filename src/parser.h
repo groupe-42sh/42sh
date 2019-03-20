@@ -4,42 +4,42 @@
 
 enum error_type_e
 {
-    ON_CHAR,
-    ON_TEXT,
-    ON_RANGE,
-    ON_INSET,
-    ON_OUTSET
+  ON_CHAR,
+  ON_TEXT,
+  ON_RANGE,
+  ON_INSET,
+  ON_OUTSET
 };
 
 struct error_s
 {
-    enum error_type_e type;
-    union
+  enum error_type_e type;
+  union
+  {
+    char c;
+    char *text;
+    char *inset;
+    char *outset;
+    struct
     {
-        char c;
-        char *text;
-        char *inset;
-        char *outset;
-        struct
-        {
-            char begin;
-            char end;
-        } range;
-    } u;
+      char begin;
+      char end;
+    } range;
+  } u;
 };
 
 
 struct parser_s {
-    const char *input;
-    size_t index;
-    struct list_capt_s *capture;
-    struct ast_node_input *ast; 
-    struct error_s *error;
+  const char *input;
+  size_t index;
+  struct list_capt_s *capture;
+  struct ast_node_input *ast; 
+  struct error_s *error;
 };
 
 typedef enum bool {
-    false,
-    true
+  false,
+  true
 }bool;
 
 struct parser_s *parser_new_from_string(const char *text);
