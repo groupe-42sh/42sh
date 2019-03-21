@@ -1,0 +1,2 @@
+if ls; then if po; then yoo; fi; echo rt; fi;
+if ls; then po echo rt; fi;

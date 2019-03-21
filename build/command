@@ -1,2 +1,2 @@
-if ls; then echo rt; fi;
-if a; then blabla; fi;
+if qsd; then echo jojo; mkdir mon_rep; fi;
+a = 12

@@ -1,7 +1,9 @@
 #ifndef AST_H
 #define AST_H
+
 #include "parser.h"
-enum shell_command_type{
+
+enum shell_command_type {
   VOID,
   FOR,
   WHILE,

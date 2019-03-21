@@ -27,13 +27,17 @@ int exec_list(struct ast_node_list *list)
     {
         return -1;
     }
-    while (list->and_ors)
+    
+    struct ast_node_and_or *last = list->and_ors;
+
+    while (last)
     {
-        if (exec_and_or(list->and_ors) == -1)
+        if (exec_and_or(list) == -1)
         {
             return -1;
         }
-        list->and_ors = list->and_ors->next;
+
+        last = last->next;
     }
     return 1;
 }
@@ -45,6 +49,18 @@ int exec_and_or(struct ast_node_and_or *and_or)
         return -1;
     }
 
+    struct ast_node_pipeline *last = and_or->pipeline;
+    
+    while (last)
+    {
+        if (exec_pipeline(last) == -1)
+        {
+            return -1;
+        }
+
+        last = last->next;
+    }
+    return 1;
 }
 int exec_rule_if(struct ast_node_rule_if *rule_if)
 {
@@ -74,15 +90,18 @@ int exec_rule_for(struct ast_node_rule_for *rule_for)
     {
         return -1;
     }
+
+    struct ast_node_word *last = rule_for->word_list;
+
     while (i == 1)
     {
-        while (rule_for->word_list)
+        while (last)
         {
-            if (exec_word(rule_for->word_list) == -1)
+            if (exec_word(last) == -1)
             {
                 return -1;
             }
-            rule_for->word_list = rule_for->word_list->next;
+            last = last->next;
         }
     }
     return exec_do_group(rule_for->do_group);
@@ -145,13 +164,15 @@ int exec_case_clause(struct ast_node_case_clause *case_clause)
     {
         return -1;
     }
-    while (case_clause->list)
+    struct ast_node_case_clause *last = case_clause->list;
+    
+    while (last)
     {
-        if (exec_word(case_clause->list) == -1)
+        if (exec_case_item(last) == -1)
         {
             return -1;
         }
-        case_clause->list = case_clause->list->next;
+        last = last->next;
     }
     return 1;
 }
@@ -162,14 +183,18 @@ int exec_case_item(struct ast_node_case_item *case_item)
     {
         return -1;
     }
-    while (case_item->word_list)
+
+    struct ast_node_word *last = case_item->word_list;
+
+    while (last)
     {
-        if (exec_word(case_item->word_list) == -1)
+        if (exec_word(last) == -1)
         {
             return -1;
         }
-        case_item->word_list = case_item->word_list->next;
+        last = last->next;
     }
+
     if (case_item->compound_list)
     {
         return exec_compound_list(case_item->compound_list);
@@ -179,5 +204,14 @@ int exec_case_item(struct ast_node_case_item *case_item)
 
 int exec_else_clause(struct ast_node_else_clause *else_clause)
 {
-    int i = exec_compound_list
+    if (!else_clause->second)
+    {
+        return exec_compound_list(else_clause->first);
+    }
+
+    struct ast_node_rule_if *if_node = {else_clause->first,
+                                        else_clause->second,
+                                        else_clause->else_clause
+                                        };
+    return exec_rule_if(if_node);
 }
