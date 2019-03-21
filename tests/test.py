@@ -32,4 +32,98 @@ def test_ls_bad_option_w():
     mout, merr = mproc.communicate(input=command)
     assert(err == merr)
 
+def test_ls():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
 
+def test_ls_option_a():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -a")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_assign_variable():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("n=5")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_operation():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("n=6+8")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
+
+def test_ls_bad_option_w():
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    command = ("ls -w")
+    out, err = proc.communicate(input=command)
+    mout, merr = mproc.communicate(input=command)
+    assert(out == mout)
