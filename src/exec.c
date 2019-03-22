@@ -158,14 +158,13 @@ int build_str(struct ast_node_command *command)
         analyze_prefix(command, &instruction);
         analyze_element(command, &instruction);
     }
-
-
-    char **instr = malloc(sizeof(char *));
+    //valeur arbitraire
+    char **instr = malloc(50 * sizeof(char *));
     if (!instr)
         return 0;
     parse(instruction, instr);
     int r = execute(instr);
-    //free(instruction);
+    free(instruction);
     //free(instr);
     return r;
 }

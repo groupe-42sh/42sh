@@ -7,12 +7,6 @@
 #include "opt-parser.h"
 #include "exe.h"
 
-int test(struct parser_s *p)
-{
-    p = p;
-    return -1;
-}
-
 int main(int ac, char **av)
 {
     int argi = 1;
@@ -42,9 +36,10 @@ int main(int ac, char **av)
 //            p->ast->list->and_ors->pipeline->command->shell_command->child._if;
 //
 //        exec_rule_if(_if);
+        struct ast_node_rule_while *_while =
+            p->ast->list->and_ors->pipeline->command->shell_command->child._while;
+        exec_rule_while(_while);
         
-
-
         if (options.print)
             full_traversal_print(p);
     }

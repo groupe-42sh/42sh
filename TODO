@@ -9,3 +9,19 @@ command : ls >>        p;
 
 QD on met uniquement " if ls;"
 l exec ne marche pas. il dit '' n est pas un directory donc indiqué . à défaut ?
+
+ASSIGNEMENT : a=b - doit marcher mais ne marche pas car parser_readinteger()
+
+
+-RESOURCE_FILE
+- charger 2 fichiers /etc/42shrc & ~/.bashrc
+- si --norc alors on ne charge pas ces fichiers
+
+-HISTORY
+- creer .42_history
+- ecrire dedans a la fermeture du shell
+- sauvegarder les commandes dans un buffer en live
+
+- "!X" avec X un nombre, execute la X-ieme commande enregistree
+- "history" display le buffer avec les numeros en debut de ligne
+--> exemple: "347   vim .bash_history"

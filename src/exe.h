@@ -6,4 +6,5 @@ int get_simple_command_ao(struct ast_node_and_or *and_or);
 int get_simple_command_cl(struct ast_node_compound_list *compound_list);
 int exec_compound_list(struct ast_node_compound_list *compound_list);
 int exec_rule_if(struct ast_node_rule_if *_if);
+int exec_rule_while(struct ast_node_rule_while *_while);
 #endif

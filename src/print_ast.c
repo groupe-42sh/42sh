@@ -174,8 +174,8 @@ void element_traversal_print(struct ast_node_element* element)
 
     if (redirection)
     {
-        redirection_traversal_print(redirection);
         fprintf(file, "ELEMENT%d -> REDIRECTION%d;\n", tab[8], ++tab[5]);
+        redirection_traversal_print(redirection);
     }
 }
 
@@ -219,42 +219,42 @@ void redirection_traversal_print(struct ast_node_redirection *redirection)
     switch (redirection->redirection_type)
     {
         case GT:
-            fprintf(file, "REDIRECTION%d -> >;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> GT%d;\n", tab[5], tab[5]);
             break;
         case LT:
-            fprintf(file, "REDIRECTION%d -> <;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> LT%d;\n", tab[5], tab[5]);
             break;
         case GTGT:
-            fprintf(file, "REDIRECTION%d -> >>;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> GTGT%d;\n", tab[5], tab[5]);
             break;
         case LTLT:
-            fprintf(file, "REDIRECTION%d -> <<;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> LTLT%d;\n", tab[5], tab[5]);
             break;
         case LTLTDASH:
-            fprintf(file, "REDIRECTION%d -> <<-;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> LTLTMIN%d;\n", tab[5], tab[5]);
             break;
         case GTESP:
-            fprintf(file, "REDIRECTION%d -> >&;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> GTESP%d;\n", tab[5], tab[5]);
             break;
         case LTESP:
-            fprintf(file, "REDIRECTION%d -> <&;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> LTESP%d;\n", tab[5], tab[5]);
             break;
         case GTPIPE:
-            fprintf(file, "REDIRECTION%d -> >|;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> GTPIPE%d;\n", tab[5], tab[5]);
             break;
         case LTGT:
-            fprintf(file, "REDIRECTION%d -> <>;\n", tab[5]);
+            fprintf(file, "REDIRECTION%d -> LTGT%d;\n", tab[5], tab[5]);
             break;
         default:
             printf("NON");
     }
 
     if (redirection->word_heredoc.word)
-        fprintf(file, "REDIRECTION%d -> WORD:%s;\n", tab[5],
+        fprintf(file, "REDIRECTION%d -> WORD -> %s;\n", tab[5],
         redirection->word_heredoc.word->str);
-    if (redirection->word_heredoc.heredoc)
-        fprintf(file, "REDIRECTION%d -> HEREDOC:%s;\n", tab[5],
-        redirection->word_heredoc.heredoc);
+    //if (redirection->word_heredoc.heredoc)
+    //    fprintf(file, "REDIRECTION%d -> HEREDOC:%s;\n", tab[5],
+    //    redirection->word_heredoc.heredoc);
 }
 
 void shell_command_traversal_print(struct ast_node_shell_command *shell_command)

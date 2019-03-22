@@ -51,11 +51,13 @@ struct ast_node_word *get_word_list(struct parser_s *p)
     struct ast_node_word *word = NULL;
     struct ast_node_word *last = NULL;
     word = root;
+
     while ((last = parser_readword(p)))
     {
         word->next = last;
         word = last;
     }
+    word->next = NULL;
     return root;
 }
 struct ast_node_rule_if *parser_readruleif (struct parser_s *p)
@@ -516,7 +518,7 @@ int get_redirection_type(struct parser_s *p)
     int i = 0;
     char *all_of_types[] = {">","<",">>","<<","<<-",">&","<&",">|","<>"};
     char *redirection = get_redirection(p);
-    while (i<9)
+    while (i < 9)
     {
         if (strcmp(redirection, all_of_types[i]) == 0)
             return i+1;
@@ -556,15 +558,15 @@ struct ast_node_redirection *parser_readredirection(struct parser_s *p)
             return NULL;
         case LTLT:
             redirection->word_heredoc.heredoc = word->str;
-            redirection->word_heredoc.word = NULL;
+            //redirection->word_heredoc.word = NULL;
             break;
         case LTLTDASH:
             redirection->word_heredoc.heredoc = word->str;
-            redirection->word_heredoc.word = NULL;
+            //redirection->word_heredoc.word = NULL;
             break;
         default:
             redirection->word_heredoc.word = word;
-            redirection->word_heredoc.heredoc = NULL;
+            //redirection->word_heredoc.heredoc = NULL;
             break;
     }
     return redirection;
@@ -597,6 +599,8 @@ struct ast_node_element *parser_readelement(struct parser_s *p)
     eat_spaces(p);
     int tmp = p->index;
     struct ast_node_element *element = malloc(sizeof(struct ast_node_element));
+    element->word = NULL;
+    element->redirection = NULL;
     element->next = NULL;
     if (!(element->redirection = parser_readredirection(p))
             && !(element->word = parser_readword(p)))
@@ -604,10 +608,14 @@ struct ast_node_element *parser_readelement(struct parser_s *p)
         p->index = tmp;
         return NULL;
     }
-    if (is_reserved_word(element->word->str))
+
+    if (element->word)
     {
-        p->index = tmp;
-        return NULL;
+        if (is_reserved_word(element->word->str))
+        {
+            p->index = tmp;
+            return NULL;
+        }
     }
     return element;
 }
@@ -637,12 +645,14 @@ struct ast_node_simple_command *parser_readsimplecommand(struct parser_s *p)
 
     struct ast_node_element *new_element = parser_readelement(p);
     simple_command->element_list = new_element;
-    struct ast_node_element *last_element = new_element;
+    struct ast_node_element *last_element = simple_command->element_list;
 
     while ((new_element = parser_readelement(p)))
     {
         while (last_element->next)
+        {
             last_element = last_element->next;
+        }
 
         last_element->next = new_element;
         new_element->next = NULL;
