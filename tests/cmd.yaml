@@ -1,0 +1,14 @@
+test1:
+    desc: 42sh v
+    ref: echo Version 0.3
+    cmd: --version
+
+test2:
+    desc: 42sh ls
+    ref: ls
+    cmd: ls
+
+test3:
+    desc: 42sh echo
+    ref: echo a`echo -n lol`b
+    cmd: echo a`echo -n lol`b

@@ -1,20 +1,21 @@
 import subprocess
 import yaml
+from termcolor import colored
 
 
 def run(cmd):
     return subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 nTest=0
-nOk=0
 nFail=0
+nOk=0
 
-with open("testsuite.yml", "r") as f:
+with open("cmd.yaml", "r") as f:
     tests = yaml.load(f)
 
 for test, data in tests.items():
     ref = run(data["ref"])
-    cmd = run(data["cmd"])
+    cmd = run("./../build/42sh " + data["cmd"])
     nTest+=1
 
     #  Listing des erreurs qui sont arrivés
@@ -31,8 +32,7 @@ for test, data in tests.items():
         nFail+=1
     else:
         "OK"
-        nOk+1
-
+        nOk+=1
     print("-" * 30)
     print("{id}: {desc} [{res}]".format(id=test, desc=data["desc"], res=res))
 
@@ -49,3 +49,9 @@ for test, data in tests.items():
         print("\t", "return code returned: " + str(cmd.returncode))
         print("\t", "return code expected: " + str(ref.returncode))
 
+
+print("Test: " + str(nTest))
+print("Passed: " + str(nOk))
+print("Failed: " + str(nFail) + "\n")
+tot=nOk/nTest
+print(str(tot) + "% passed" + "\n")

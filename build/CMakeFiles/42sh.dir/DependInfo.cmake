@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/k-ou/amar.slimane-42sh-apping/src/ast.c" "/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir/src/ast.c.o"
-  "/home/k-ou/amar.slimane-42sh-apping/src/extract.c" "/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir/src/extract.c.o"
-  "/home/k-ou/amar.slimane-42sh-apping/src/ini.c" "/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir/src/ini.c.o"
-  "/home/k-ou/amar.slimane-42sh-apping/src/opt-parser.c" "/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir/src/opt-parser.c.o"
-  "/home/k-ou/amar.slimane-42sh-apping/src/parser.c" "/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir/src/parser.c.o"
-  "/home/k-ou/amar.slimane-42sh-apping/src/print_ast.c" "/home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/42sh.dir/src/print_ast.c.o"
+  "/home/youcef/dossier/42sh/42sh/src/ast.c" "/home/youcef/dossier/42sh/42sh/build/CMakeFiles/42sh.dir/src/ast.c.o"
+  "/home/youcef/dossier/42sh/42sh/src/extract.c" "/home/youcef/dossier/42sh/42sh/build/CMakeFiles/42sh.dir/src/extract.c.o"
+  "/home/youcef/dossier/42sh/42sh/src/ini.c" "/home/youcef/dossier/42sh/42sh/build/CMakeFiles/42sh.dir/src/ini.c.o"
+  "/home/youcef/dossier/42sh/42sh/src/opt-parser.c" "/home/youcef/dossier/42sh/42sh/build/CMakeFiles/42sh.dir/src/opt-parser.c.o"
+  "/home/youcef/dossier/42sh/42sh/src/parser.c" "/home/youcef/dossier/42sh/42sh/build/CMakeFiles/42sh.dir/src/parser.c.o"
+  "/home/youcef/dossier/42sh/42sh/src/print_ast.c" "/home/youcef/dossier/42sh/42sh/build/CMakeFiles/42sh.dir/src/print_ast.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

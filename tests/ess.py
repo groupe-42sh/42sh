@@ -2,7 +2,7 @@ import subprocess
 from termcolor import colored
 
 def test_echo_backslash_n():
-    proc = subprocess.Popen(["bash--POSIX"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    proc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
     mproc = subprocess.Popen(["bash"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
     command = (b"echo hello world")
     out, err = proc.communicate(input=command)
