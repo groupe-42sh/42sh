@@ -12,3 +12,6 @@ test3:
     desc: 42sh echo
     ref: echo a`echo -n lol`b
     cmd: echo a`echo -n lol`b
+
+test4:
+    
