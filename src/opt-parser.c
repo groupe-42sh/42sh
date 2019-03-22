@@ -59,6 +59,5 @@ int opt_parse(int argv, char *argc[], int *argi, struct options *options)
             return 1;
         }
     }
-
     return 0;
 }

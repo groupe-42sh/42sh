@@ -6,6 +6,11 @@ CMakeFiles/42sh.dir/src/ast.c.o
  /home/k-ou/amar.slimane-42sh-apping/src/ast.h
  /home/k-ou/amar.slimane-42sh-apping/src/extract.h
  /home/k-ou/amar.slimane-42sh-apping/src/parser.h
+CMakeFiles/42sh.dir/src/exec.c.o
+ /home/k-ou/amar.slimane-42sh-apping/src/ast.h
+ /home/k-ou/amar.slimane-42sh-apping/src/exe.h
+ /home/k-ou/amar.slimane-42sh-apping/src/exec.c
+ /home/k-ou/amar.slimane-42sh-apping/src/parser.h
 CMakeFiles/42sh.dir/src/extract.c.o
  /home/k-ou/amar.slimane-42sh-apping/src/ast.h
  /home/k-ou/amar.slimane-42sh-apping/src/extract.c
@@ -13,6 +18,7 @@ CMakeFiles/42sh.dir/src/extract.c.o
  /home/k-ou/amar.slimane-42sh-apping/src/parser.h
 CMakeFiles/42sh.dir/src/ini.c.o
  /home/k-ou/amar.slimane-42sh-apping/src/ast.h
+ /home/k-ou/amar.slimane-42sh-apping/src/exe.h
  /home/k-ou/amar.slimane-42sh-apping/src/extract.h
  /home/k-ou/amar.slimane-42sh-apping/src/ini.c
  /home/k-ou/amar.slimane-42sh-apping/src/opt-parser.h

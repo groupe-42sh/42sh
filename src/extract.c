@@ -9,7 +9,7 @@
 #include <time.h>
 void eat_spaces(struct parser_s *p)
 {
-    while (parser_peekchar(p, ' '))
+    while (parser_peekchar(p, ' ') || parser_peekchar(p, '\t'))
     {
         p->index++;
     }
@@ -68,8 +68,8 @@ struct ast_node_rule_if *parser_readruleif (struct parser_s *p)
     rule_if->else_clause = NULL;
 
     if (!(rule_if->condition = parser_readcompoundlist(p))
-        || !(parser_readtext(p, "then"))
-        || !(rule_if->body = parser_readcompoundlist(p)))
+            || !(parser_readtext(p, "then"))
+            || !(rule_if->body = parser_readcompoundlist(p)))
     {
         p->index = tmp;
         return NULL;
@@ -151,12 +151,13 @@ struct ast_node_assignement_word *get_assignement_word(struct parser_s *p)
     int c =0;
     struct ast_node_assignement_word *assignement_word =
         malloc(sizeof(struct ast_node_assignement_word));
-    if (!(assignement_word->var_name = get_word(p))
+    if (!(assignement_word->var_name = get_word(p)) || parser_peekchar(p,' ')
             || (!(c=parser_readchar(p, '=')))
+            || parser_peekchar(p,' ')
             || (!(assignement_word->value = get_value(p))))
     {
         if (!is_delimiter(p) && !get_word(p) && !parser_peekinset(p, "<>-&|")
-            && (get_io_number(p) == -1))
+                && (get_io_number(p) == -1))
             exit_on_error(p);
         p->index = tmp;
         return NULL;
@@ -208,15 +209,15 @@ struct ast_node_compound_list *parser_readcompoundlist(struct parser_s *p)
     compound_list->and_or = and_or;
     struct ast_node_and_or *last = compound_list->and_or;
     bool c = false;
-    
+
     struct ast_node_and_or *new = NULL;
 
     while (!(parser_peektext(p,";;")) && (parser_readchar(p,';')
-        || (c = parser_readchar(p,'&')) || parser_readchar(p,'\n')))
+                || (c = parser_readchar(p,'&')) || parser_readchar(p,'\n')))
     {
         eat_newlines(p);
         and_or->linked = c;
-    
+
         if ((new = parser_readandor(p)))
         {
             while (last->next)
@@ -327,12 +328,12 @@ struct ast_node_else_clause *parser_readelseclause(struct parser_s *p)
     else_clause->second = NULL;
     else_clause->else_clause = NULL;
     if (parser_readtext(p,"else")
-        && (else_clause->first = parser_readcompoundlist(p)))
+            && (else_clause->first = parser_readcompoundlist(p)))
         return else_clause;
     if (parser_readtext(p,"elif")
-        && (else_clause->first = parser_readcompoundlist(p))
-        && parser_readtext(p,"then")
-        && (else_clause->second = parser_readcompoundlist(p)))
+            && (else_clause->first = parser_readcompoundlist(p))
+            && parser_readtext(p,"then")
+            && (else_clause->second = parser_readcompoundlist(p)))
     {
         else_clause->else_clause = parser_readelseclause(p);
         return else_clause;
@@ -348,8 +349,8 @@ struct ast_node_do_group *parser_readdogroup(struct parser_s *p)
         malloc(sizeof(struct ast_node_do_group));
     struct ast_node_compound_list *compound_list = NULL;
     if (!parser_readtext(p,"do")
-        || !(compound_list = parser_readcompoundlist(p))
-        || !parser_readtext(p,"done"))
+            || !(compound_list = parser_readcompoundlist(p))
+            || !parser_readtext(p,"done"))
     {
         p->index = tmp;
         return NULL;
@@ -368,7 +369,7 @@ struct ast_node_rule_until *parser_readruleuntil(struct parser_s *p)
     struct ast_node_compound_list *compound_list = NULL;
     struct ast_node_do_group *do_group = NULL;
     if (!(compound_list = parser_readcompoundlist(p))
-        || !(do_group = parser_readdogroup(p)))
+            || !(do_group = parser_readdogroup(p)))
     {
         p->index = tmp;
         return NULL;
@@ -388,7 +389,7 @@ struct ast_node_rule_while *parser_readrulewhile (struct parser_s *p)
     struct ast_node_compound_list *compound_list = NULL;
     struct ast_node_do_group *do_group = NULL;
     if (!(compound_list = parser_readcompoundlist(p))
-        || !(do_group = parser_readdogroup(p)))
+            || !(do_group = parser_readdogroup(p)))
     {
         p->index = tmp;
         return NULL;
@@ -429,7 +430,7 @@ struct ast_node_shell_command *parser_readshellcommand(struct parser_s *p)
         }
         shell_command->child.compound_list = compound_list;
         if ((c && !(parser_readchar(p,')')))
-            || (!c && !(parser_readchar(p,'}'))))
+                || (!c && !(parser_readchar(p,'}'))))
         {
             p->index = tmp;
             return NULL;
@@ -477,7 +478,7 @@ struct ast_node_funcdec *parser_readfuncdec (struct parser_s *p)
     funcdec->shell_command = NULL;
     parser_readtext(p,"function");
     if (!((funcdec->word = parser_readword(p)) && parser_readchar(p,'(')
-        && parser_readchar(p,')')))
+                && parser_readchar(p,')')))
     {
         p->index = tmp;
         return NULL;
@@ -504,6 +505,7 @@ int get_io_number(struct parser_s *p)
 }
 char *get_redirection(struct parser_s *p)
 {
+    eat_spaces(p);
     int tmp = p->index;
     while (parser_readinset(p,"<>-&|"))
         p->index++;
@@ -575,7 +577,7 @@ struct ast_node_prefix *parser_readprefix(struct parser_s *p)
     struct ast_node_prefix *prefix = malloc(sizeof(struct ast_node_element));
     prefix->next = NULL;
     if (!(prefix->redirection = parser_readredirection(p))
-        && !(prefix->assignement_word = parser_readassignementword(p)))
+            && !(prefix->assignement_word = parser_readassignementword(p)))
     {
         p->index = tmp;
         return NULL;
@@ -597,7 +599,7 @@ struct ast_node_element *parser_readelement(struct parser_s *p)
     struct ast_node_element *element = malloc(sizeof(struct ast_node_element));
     element->next = NULL;
     if (!(element->redirection = parser_readredirection(p))
-        && !(element->word = parser_readword(p)))
+            && !(element->word = parser_readword(p)))
     {
         p->index = tmp;
         return NULL;
@@ -617,19 +619,20 @@ struct ast_node_simple_command *parser_readsimplecommand(struct parser_s *p)
         malloc(sizeof(struct ast_node_simple_command));
     simple_command->element_list = NULL;
     simple_command->prefix_list = NULL;
-    
+
     struct ast_node_prefix *new = parser_readprefix(p);
 
     simple_command->prefix_list = new;
-    
+
 
     struct ast_node_prefix *last = simple_command->prefix_list;
-    
+
     while ((new = parser_readprefix(p)))
     {
         while (last->next)
             last = last->next;
         last->next = new;
+        new->next = NULL;
     }
 
     struct ast_node_element *new_element = parser_readelement(p);
@@ -642,7 +645,9 @@ struct ast_node_simple_command *parser_readsimplecommand(struct parser_s *p)
             last_element = last_element->next;
 
         last_element->next = new_element;
+        new_element->next = NULL;
     }
+
 
     if (!(simple_command->element_list) && !(simple_command->prefix_list))
     {
@@ -655,15 +660,15 @@ int type_of_command(struct parser_s *p)
 {
     int tmp = p->index;
     if (parser_readchar(p,'{') || parser_readchar(p,'(')
-        || ((parser_readtext(p,"while") || parser_readtext(p,"for")
-        || parser_readtext(p,"if") || parser_readtext(p,"until")
-        || parser_readtext(p,"case")) && parser_readchar(p,' ')))
+            || ((parser_readtext(p,"while") || parser_readtext(p,"for")
+                    || parser_readtext(p,"if") || parser_readtext(p,"until")
+                    || parser_readtext(p,"case")) && parser_readchar(p,' ')))
     {
         p->index=tmp;
         return SHELL;
     }
     if ((parser_readtext(p,"function") && parser_readchar(p,' '))
-        || (parser_readidentifier(p) && parser_readchar(p,'(')))
+            || (parser_readidentifier(p) && parser_readchar(p,'(')))
     {
         p->index=tmp;
         return FUNCDEC;
@@ -771,7 +776,7 @@ struct ast_node_and_or *parser_readandor (struct parser_s *p)
     and_or->linked = false;
     and_or->next = NULL;
     and_or->pipeline = NULL;
-        
+
     struct ast_node_pipeline *new = NULL;
 
     if (!(new = parser_readpipeline(p)))
@@ -779,7 +784,7 @@ struct ast_node_and_or *parser_readandor (struct parser_s *p)
         p->index = tmp;
         return NULL;
     }
-   
+
     and_or->pipeline = new;
 
     struct ast_node_pipeline *last = and_or->pipeline;
@@ -790,14 +795,14 @@ struct ast_node_and_or *parser_readandor (struct parser_s *p)
     bool c = false;
 
     while ((c = (parser_readtext(p,"||")) || (parser_readtext(p,"&&")))
-        && (new = parser_readpipeline(p)))
+            && (new = parser_readpipeline(p)))
     {
         if (c)
             new->relation = TOKEN_DOUBLE_PIPE;
         else
             new->relation = TOKEN_DOUBLE_AMPERSAND;
         eat_newlines(p);
-        
+
         while (last->next)
             last = last->next;
 
@@ -831,13 +836,13 @@ struct ast_node_list *parser_readlist (struct parser_s *p)
     bool c = false;
 
     while ((parser_readchar(p,';') || (c = (parser_readchar(p,'&'))))
-        && (new = parser_readandor(p)))
+            && (new = parser_readandor(p)))
     {
         while (last->next != NULL)
             last = last->next;
         new->linked = c;
         last->next = new;
-        
+
         c = false;
     }
     return p->ast->list;
@@ -855,7 +860,7 @@ bool parser_readinput (struct parser_s *p)
     if (parser_eof(p))
         return true;
     if ((p->ast->list=parser_readlist(p))
-        && ((parser_readchar(p, '\n') || parser_eof(p))))
+            && ((parser_readchar(p, '\n') || parser_eof(p))))
         return true;
     p->index = tmp;
     return false;

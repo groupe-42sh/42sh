@@ -5,6 +5,7 @@
 #include "ast.h"
 #include "print_ast.h"
 #include "opt-parser.h"
+#include "exe.h"
 
 int test(struct parser_s *p)
 {
@@ -36,6 +37,13 @@ int main(int ac, char **av)
     if (parser_readinput(p))
     {
         puts("parsing success");
+            
+//        struct ast_node_rule_if *_if =
+//            p->ast->list->and_ors->pipeline->command->shell_command->child._if;
+//
+//        exec_rule_if(_if);
+        
+
 
         if (options.print)
             full_traversal_print(p);

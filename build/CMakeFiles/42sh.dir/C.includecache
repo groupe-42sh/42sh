@@ -22,6 +22,26 @@ stdio.h
 parser.h
 /home/k-ou/amar.slimane-42sh-apping/src/parser.h
 
+/home/k-ou/amar.slimane-42sh-apping/src/exe.h
+
+/home/k-ou/amar.slimane-42sh-apping/src/exec.c
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+unistd.h
+-
+sys/types.h
+-
+sys/wait.h
+-
+ast.h
+/home/k-ou/amar.slimane-42sh-apping/src/ast.h
+exe.h
+/home/k-ou/amar.slimane-42sh-apping/src/exe.h
+
 /home/k-ou/amar.slimane-42sh-apping/src/extract.c
 string.h
 -
@@ -59,6 +79,8 @@ print_ast.h
 /home/k-ou/amar.slimane-42sh-apping/src/print_ast.h
 opt-parser.h
 /home/k-ou/amar.slimane-42sh-apping/src/opt-parser.h
+exe.h
+/home/k-ou/amar.slimane-42sh-apping/src/exe.h
 
 /home/k-ou/amar.slimane-42sh-apping/src/opt-parser.c
 stdio.h

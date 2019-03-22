@@ -2,8 +2,10 @@ COMPRENDRE '&':
 "If a command is terminated by the control operator ampersand ( '&' ), the shell shall execute the command asynchronously in a subshell. This means that the shell shall not wait for the command to finish before executing the next command"
 
 
-JUST CORRIGER LES REDIRECTIONS, pcq ...
-RAJOUTER EN DELIMITER '<' et consort pcq sinon redirection ne fonctionne pas.
+
+SEGFAULT AST PRINTER AVEC UNE REDIRECTION
+command : ls >>        p;
 
 
-PAS D ESPACES DANS LES ASSIGNMENTS ENTRE LA VAR LE = ET LA VALEUR
+QD on met uniquement " if ls;"
+l exec ne marche pas. il dit '' n est pas un directory donc indiqué . à défaut ?

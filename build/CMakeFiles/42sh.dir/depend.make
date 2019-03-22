@@ -6,12 +6,18 @@ CMakeFiles/42sh.dir/src/ast.c.o: ../src/ast.h
 CMakeFiles/42sh.dir/src/ast.c.o: ../src/extract.h
 CMakeFiles/42sh.dir/src/ast.c.o: ../src/parser.h
 
+CMakeFiles/42sh.dir/src/exec.c.o: ../src/ast.h
+CMakeFiles/42sh.dir/src/exec.c.o: ../src/exe.h
+CMakeFiles/42sh.dir/src/exec.c.o: ../src/exec.c
+CMakeFiles/42sh.dir/src/exec.c.o: ../src/parser.h
+
 CMakeFiles/42sh.dir/src/extract.c.o: ../src/ast.h
 CMakeFiles/42sh.dir/src/extract.c.o: ../src/extract.c
 CMakeFiles/42sh.dir/src/extract.c.o: ../src/extract.h
 CMakeFiles/42sh.dir/src/extract.c.o: ../src/parser.h
 
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/ast.h
+CMakeFiles/42sh.dir/src/ini.c.o: ../src/exe.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/extract.h
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/ini.c
 CMakeFiles/42sh.dir/src/ini.c.o: ../src/opt-parser.h

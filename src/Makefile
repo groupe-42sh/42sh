@@ -51,7 +51,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/k-ou/amar.slimane-42sh-apping
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/k-ou/amar.slimane-42sh-apping/build
+CMAKE_BINARY_DIR = /home/k-ou/amar.slimane-42sh-apping/src
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles /home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/k-ou/amar.slimane-42sh-apping/src/CMakeFiles /home/k-ou/amar.slimane-42sh-apping/src/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/k-ou/amar.slimane-42sh-apping/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/k-ou/amar.slimane-42sh-apping/src/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,194 +123,194 @@ depend:
 	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/build
 .PHONY : 42sh/fast
 
-src/ast.o: src/ast.c.o
+ast.o: ast.c.o
 
-.PHONY : src/ast.o
-
-# target to build an object file
-src/ast.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ast.c.o
-.PHONY : src/ast.c.o
-
-src/ast.i: src/ast.c.i
-
-.PHONY : src/ast.i
-
-# target to preprocess a source file
-src/ast.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ast.c.i
-.PHONY : src/ast.c.i
-
-src/ast.s: src/ast.c.s
-
-.PHONY : src/ast.s
-
-# target to generate assembly for a file
-src/ast.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ast.c.s
-.PHONY : src/ast.c.s
-
-src/exec.o: src/exec.c.o
-
-.PHONY : src/exec.o
+.PHONY : ast.o
 
 # target to build an object file
-src/exec.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/exec.c.o
-.PHONY : src/exec.c.o
+ast.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/ast.c.o
+.PHONY : ast.c.o
 
-src/exec.i: src/exec.c.i
+ast.i: ast.c.i
 
-.PHONY : src/exec.i
+.PHONY : ast.i
 
 # target to preprocess a source file
-src/exec.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/exec.c.i
-.PHONY : src/exec.c.i
+ast.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/ast.c.i
+.PHONY : ast.c.i
 
-src/exec.s: src/exec.c.s
+ast.s: ast.c.s
 
-.PHONY : src/exec.s
+.PHONY : ast.s
 
 # target to generate assembly for a file
-src/exec.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/exec.c.s
-.PHONY : src/exec.c.s
+ast.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/ast.c.s
+.PHONY : ast.c.s
 
-src/extract.o: src/extract.c.o
+exec.o: exec.c.o
 
-.PHONY : src/extract.o
+.PHONY : exec.o
 
 # target to build an object file
-src/extract.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/extract.c.o
-.PHONY : src/extract.c.o
+exec.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/exec.c.o
+.PHONY : exec.c.o
 
-src/extract.i: src/extract.c.i
+exec.i: exec.c.i
 
-.PHONY : src/extract.i
+.PHONY : exec.i
 
 # target to preprocess a source file
-src/extract.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/extract.c.i
-.PHONY : src/extract.c.i
+exec.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/exec.c.i
+.PHONY : exec.c.i
 
-src/extract.s: src/extract.c.s
+exec.s: exec.c.s
 
-.PHONY : src/extract.s
+.PHONY : exec.s
 
 # target to generate assembly for a file
-src/extract.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/extract.c.s
-.PHONY : src/extract.c.s
+exec.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/exec.c.s
+.PHONY : exec.c.s
 
-src/ini.o: src/ini.c.o
+extract.o: extract.c.o
 
-.PHONY : src/ini.o
+.PHONY : extract.o
 
 # target to build an object file
-src/ini.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ini.c.o
-.PHONY : src/ini.c.o
+extract.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/extract.c.o
+.PHONY : extract.c.o
 
-src/ini.i: src/ini.c.i
+extract.i: extract.c.i
 
-.PHONY : src/ini.i
+.PHONY : extract.i
 
 # target to preprocess a source file
-src/ini.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ini.c.i
-.PHONY : src/ini.c.i
+extract.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/extract.c.i
+.PHONY : extract.c.i
 
-src/ini.s: src/ini.c.s
+extract.s: extract.c.s
 
-.PHONY : src/ini.s
+.PHONY : extract.s
 
 # target to generate assembly for a file
-src/ini.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/ini.c.s
-.PHONY : src/ini.c.s
+extract.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/extract.c.s
+.PHONY : extract.c.s
 
-src/opt-parser.o: src/opt-parser.c.o
+ini.o: ini.c.o
 
-.PHONY : src/opt-parser.o
+.PHONY : ini.o
 
 # target to build an object file
-src/opt-parser.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/opt-parser.c.o
-.PHONY : src/opt-parser.c.o
+ini.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/ini.c.o
+.PHONY : ini.c.o
 
-src/opt-parser.i: src/opt-parser.c.i
+ini.i: ini.c.i
 
-.PHONY : src/opt-parser.i
+.PHONY : ini.i
 
 # target to preprocess a source file
-src/opt-parser.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/opt-parser.c.i
-.PHONY : src/opt-parser.c.i
+ini.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/ini.c.i
+.PHONY : ini.c.i
 
-src/opt-parser.s: src/opt-parser.c.s
+ini.s: ini.c.s
 
-.PHONY : src/opt-parser.s
+.PHONY : ini.s
 
 # target to generate assembly for a file
-src/opt-parser.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/opt-parser.c.s
-.PHONY : src/opt-parser.c.s
+ini.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/ini.c.s
+.PHONY : ini.c.s
 
-src/parser.o: src/parser.c.o
+opt-parser.o: opt-parser.c.o
 
-.PHONY : src/parser.o
+.PHONY : opt-parser.o
 
 # target to build an object file
-src/parser.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/parser.c.o
-.PHONY : src/parser.c.o
+opt-parser.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/opt-parser.c.o
+.PHONY : opt-parser.c.o
 
-src/parser.i: src/parser.c.i
+opt-parser.i: opt-parser.c.i
 
-.PHONY : src/parser.i
+.PHONY : opt-parser.i
 
 # target to preprocess a source file
-src/parser.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/parser.c.i
-.PHONY : src/parser.c.i
+opt-parser.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/opt-parser.c.i
+.PHONY : opt-parser.c.i
 
-src/parser.s: src/parser.c.s
+opt-parser.s: opt-parser.c.s
 
-.PHONY : src/parser.s
+.PHONY : opt-parser.s
 
 # target to generate assembly for a file
-src/parser.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/parser.c.s
-.PHONY : src/parser.c.s
+opt-parser.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/opt-parser.c.s
+.PHONY : opt-parser.c.s
 
-src/print_ast.o: src/print_ast.c.o
+parser.o: parser.c.o
 
-.PHONY : src/print_ast.o
+.PHONY : parser.o
 
 # target to build an object file
-src/print_ast.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/print_ast.c.o
-.PHONY : src/print_ast.c.o
+parser.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/parser.c.o
+.PHONY : parser.c.o
 
-src/print_ast.i: src/print_ast.c.i
+parser.i: parser.c.i
 
-.PHONY : src/print_ast.i
+.PHONY : parser.i
 
 # target to preprocess a source file
-src/print_ast.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/print_ast.c.i
-.PHONY : src/print_ast.c.i
+parser.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/parser.c.i
+.PHONY : parser.c.i
 
-src/print_ast.s: src/print_ast.c.s
+parser.s: parser.c.s
 
-.PHONY : src/print_ast.s
+.PHONY : parser.s
 
 # target to generate assembly for a file
-src/print_ast.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/print_ast.c.s
-.PHONY : src/print_ast.c.s
+parser.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/parser.c.s
+.PHONY : parser.c.s
+
+print_ast.o: print_ast.c.o
+
+.PHONY : print_ast.o
+
+# target to build an object file
+print_ast.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/print_ast.c.o
+.PHONY : print_ast.c.o
+
+print_ast.i: print_ast.c.i
+
+.PHONY : print_ast.i
+
+# target to preprocess a source file
+print_ast.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/print_ast.c.i
+.PHONY : print_ast.c.i
+
+print_ast.s: print_ast.c.s
+
+.PHONY : print_ast.s
+
+# target to generate assembly for a file
+print_ast.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/print_ast.c.s
+.PHONY : print_ast.c.s
 
 # Help Target
 help:
@@ -321,27 +321,27 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... 42sh"
-	@echo "... src/ast.o"
-	@echo "... src/ast.i"
-	@echo "... src/ast.s"
-	@echo "... src/exec.o"
-	@echo "... src/exec.i"
-	@echo "... src/exec.s"
-	@echo "... src/extract.o"
-	@echo "... src/extract.i"
-	@echo "... src/extract.s"
-	@echo "... src/ini.o"
-	@echo "... src/ini.i"
-	@echo "... src/ini.s"
-	@echo "... src/opt-parser.o"
-	@echo "... src/opt-parser.i"
-	@echo "... src/opt-parser.s"
-	@echo "... src/parser.o"
-	@echo "... src/parser.i"
-	@echo "... src/parser.s"
-	@echo "... src/print_ast.o"
-	@echo "... src/print_ast.i"
-	@echo "... src/print_ast.s"
+	@echo "... ast.o"
+	@echo "... ast.i"
+	@echo "... ast.s"
+	@echo "... exec.o"
+	@echo "... exec.i"
+	@echo "... exec.s"
+	@echo "... extract.o"
+	@echo "... extract.i"
+	@echo "... extract.s"
+	@echo "... ini.o"
+	@echo "... ini.i"
+	@echo "... ini.s"
+	@echo "... opt-parser.o"
+	@echo "... opt-parser.i"
+	@echo "... opt-parser.s"
+	@echo "... parser.o"
+	@echo "... parser.i"
+	@echo "... parser.s"
+	@echo "... print_ast.o"
+	@echo "... print_ast.i"
+	@echo "... print_ast.s"
 .PHONY : help
 
 

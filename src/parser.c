@@ -214,6 +214,21 @@ bool parser_readidentifier(struct parser_s *p)
     return false;
 }
 
+//bool parser_readword(struct parser_s *p)
+//{
+//  int tmp = p->index;
+
+//  while (!is_delimiter(p))
+//    {
+//           if (!(read_min(p) || read_maj(p)
+//		 || read_underscore(p) || read_digit(p) || parser_readinset("-[]")))
+//	     return false;
+//    }
+// return true;
+
+//}
+
+
 bool parser_readinteger(struct parser_s *p)
 {
     eat_spaces(p);
