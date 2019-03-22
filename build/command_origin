@@ -1,1 +1,0 @@
-if ls; then echo ohco; mkdir standin; fi
