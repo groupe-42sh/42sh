@@ -1,17 +1,54 @@
-test1:
+Test 1:
     desc: 42sh v
     ref: echo Version 0.3
     cmd: --version
 
-test2:
+Test 2:
     desc: 42sh ls
     ref: ls
     cmd: ls
 
-test3:
+Test 3:
     desc: 42sh echo
     ref: echo a`echo -n lol`b
     cmd: echo a`echo -n lol`b
 
-test4:
-    
+Test 4:
+    desc: 42sh file
+    ref: file_test/if_simple
+    cmd: file_test/if_simple
+
+Test 5:
+    desc: 42sh file
+    ref: ./file_test/if_simple
+    cmd: ./file_test/if_simple
+
+Test 6:
+    desc: 42sh OR
+    ref: ({ echo toto; false; } || echo titi || echo tutu || echo mumu || { echo ca bande; exit 2; } && echo "ouais")
+    cmd: ({ echo toto; false; } || echo titi || echo tutu || echo mumu || { echo ca bande; exit 2; } && echo "ouais")
+
+Test 7:
+    desc: 42sh AND
+    ref: ({ echo toto; false; } && echo titi && echo tutu && echo mumu || { echo ca bande; exit 2; })
+    cmd: ({ echo toto; false; } && echo titi && echo tutu && echo mumu || { echo ca bande; exit 2; })
+
+Test 8:
+    desc: 42sh pipe
+    ref: (toto=bite tata=chate >chiche  echo foo bar baze 1>pipi 4>popo >>pupu)
+    cmd: (toto=bite tata=chate >chiche  echo foo bar baze 1>pipi 4>popo >>pupu)
+
+Test 9:
+    desc: 42sh fi
+    ref: (true; fi)
+    cmd: (true; fi)
+
+Test 10:
+    desc: 42sh empty
+    ref: ""
+    cmd: ""
+
+Test 11:
+    desc: 42sh clean
+    ref: (rm pipi pupu)
+    cmd: (rm popo chiche)

@@ -45,4 +45,5 @@ int main(int ac, char **av)
         printf("parsing failed at %ld\n", p->index);
     }
     free(content);
+    return 0;
 }
