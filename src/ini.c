@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "parser.h"
 #include "extract.h"
 #include "ast.h"
 #include "print_ast.h"
 #include "opt-parser.h"
+
+char* concat(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1) + strlen(s2) + 1);
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
 
 int test(struct parser_s *p)
 {
@@ -25,10 +34,20 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
 
     FILE *shrc1 = fopen("/etc/42shrc", "r");
-    FILE *shrc2 = fopen("~/.42shrc", "r");
+    char *shrcc = concat(getenv("HOME"), "/.42shrc");
+    FILE *shrc2 = fopen(shrcc, "r");
+    FILE *shrc=NULL;
 
-    if(shrc1==NULL && shrc2==NULL)
+    if (shrc1==NULL && shrc2==NULL)
         printf("No 42shrc found\n");
+    else
+    {
+        if (shrc1==NULL)
+            shrc = shrc2;
+        else
+            shrc = shrc1;
+    }
+    fclose(shrc);
 
     fseek(inifile, 0, SEEK_END);
     long fsize = ftell(inifile);

@@ -21,6 +21,8 @@ stdio.h
 -
 stdlib.h
 -
+string.h
+-
 parser.h
 /home/youcef/dossier/42sh/src/parser.h
 extract.h
