@@ -39,7 +39,14 @@ int main(int ac, char **av)
         struct ast_node_rule_while *_while =
             p->ast->list->and_ors->pipeline->command->shell_command->child._while;
         exec_rule_while(_while);
-        
+     
+//        struct ast_node_assignement_word *aw =
+//            malloc(sizeof(struct ast_node_assignement_word));
+//        aw->var_name = "my_var";
+//        aw->value = "avalue";
+//        aw->next = NULL;
+//        //build_str(p->ast->list->and_ors->pipeline->command);
+//        exec_assignement_word(aw);
         if (options.print)
             full_traversal_print(p);
     }

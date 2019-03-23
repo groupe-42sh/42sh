@@ -12,13 +12,13 @@ void *voidifier(void *ptr)
 
 FILE *file = NULL;
 int i = 0;
-int tab [24] = {0};
+int tab [25] = {0};
 
 void assignement_word_traversal_print
-    (struct ast_node_assignement_word *assignement_word)
+(struct ast_node_assignement_word *assignement_word)
 {
     fprintf(file, "ASSIGN_WORD%d -> VAR%d -> %s;\n", tab[19], ++tab[24], assignement_word->var_name);
-    fprintf(file, "ASSIGN_WORD%d -> VALUE%d -> %d;\n", tab[19], ++tab[25], assignement_word->value);
+    fprintf(file, "ASSIGN_WORD%d -> VALUE%d -> \"%s\";\n", tab[19], ++tab[25], assignement_word->value);
 }
 
 void word_traversal_print(struct ast_node_word *word)
@@ -61,7 +61,7 @@ void do_group_traversal_print(struct ast_node_do_group *do_group)
 {
     struct ast_node_compound_list *compound_list = do_group->compound_list;
 
-    fprintf(file, "DO_GROUP%d -> COMPOUND_LIST%d;\n", ++tab[21], ++tab[18]);
+    fprintf(file, "DO_GROUP%d -> COMPOUND_LIST%d;\n", tab[21]++, ++tab[18]);
     compound_list_traversal_print(compound_list);
 }
 
@@ -125,7 +125,7 @@ void rule_until_traversal_print(struct ast_node_rule_until *_until)
 
     fprintf(file, "UNTIL%d -> COMPOUND_LIST%d;\n", tab[15], ++tab[18]);
     compound_list_traversal_print(compound_list);
-    fprintf(file, "UNTIL%d -> COMPOUND_LIST%d;\n", tab[15], ++tab[18]);
+    fprintf(file, "UNTIL%d -> DO_GROUP%d;\n", tab[15], tab[18]);
     do_group_traversal_print(do_group);
 }
 
@@ -136,7 +136,7 @@ void rule_while_traversal_print(struct ast_node_rule_while *_while)
 
     fprintf(file, "WHILE%d -> COMPOUND_LIST%d;\n", tab[12], ++tab[18]);
     compound_list_traversal_print(compound_list);
-    fprintf(file, "WHILE%d -> DO_GROUP%d;\n", tab[12], ++tab[21]);
+    fprintf(file, "WHILE%d -> DO_GROUP%d;\n", tab[12], tab[21]);
     do_group_traversal_print(do_group);
 }
 
@@ -151,7 +151,7 @@ void rule_for_traversal_print(struct ast_node_rule_for *_for)
     while (word_list)
     {
         fprintf(file, "FOR%d -> WORD%d -> VAR%d -> %s\n", ++tab[11], ++tab[16],
-        ++tab[24], word_list->str);
+                ++tab[24], word_list->str);
         word_traversal_print(word);
         word_list = word_list->next;
     }
@@ -214,7 +214,7 @@ void compound_list_traversal_print(struct ast_node_compound_list *compound_list)
 void redirection_traversal_print(struct ast_node_redirection *redirection)
 {
     fprintf(file, "REDIRECTION%d -> IO_NUMBER%d;\n", tab[5],
-        redirection->io_number);
+            redirection->io_number);
 
     switch (redirection->redirection_type)
     {
@@ -251,7 +251,7 @@ void redirection_traversal_print(struct ast_node_redirection *redirection)
 
     if (redirection->word_heredoc.word)
         fprintf(file, "REDIRECTION%d -> WORD -> %s;\n", tab[5],
-        redirection->word_heredoc.word->str);
+                redirection->word_heredoc.word->str);
     //if (redirection->word_heredoc.heredoc)
     //    fprintf(file, "REDIRECTION%d -> HEREDOC:%s;\n", tab[5],
     //    redirection->word_heredoc.heredoc);
@@ -285,9 +285,9 @@ void shell_command_traversal_print(struct ast_node_shell_command *shell_command)
             break;
         case VOID:
             fprintf(file, "SHELL_COMMAND%d -> COMPOUND_LIST%d;\n", tab[10],
-            ++tab[18]);
+                    ++tab[18]);
             compound_list_traversal_print(shell_command->child.compound_list);
-             break;
+            break;
     }
 }
 
@@ -328,21 +328,21 @@ void command_traversal_print(struct ast_node_command *command)
     if (simple_command)
     {
         fprintf(file, "COMMAND%d -> SIMPLE_COMMAND%d;\n", tab[4],
-        ++tab[6]);
+                ++tab[6]);
         simple_command_traversal_print(simple_command);
     }
 
     if (shell_command)
     {
         fprintf(file, "COMMAND%d -> SHELL_COMMAND%d;\n", tab[4],
-        ++tab[10]);
+                ++tab[10]);
         shell_command_traversal_print(shell_command);
     }
 
     if (funcdec)
     {
         fprintf(file, "COMMAND%d -> FUNCDEC%d;\n", tab[4],
-        ++tab[9]);
+                ++tab[9]);
         funcdec_traversal_print(funcdec);
     }
 
@@ -380,7 +380,7 @@ void and_or_traversal_print(struct ast_node_and_or *and_or)
 
     if (!and_or)
         return;
-    
+
     struct ast_node_pipeline *pipeline = and_or->pipeline;
 
     while (pipeline)
@@ -415,7 +415,7 @@ void full_traversal_print(struct parser_s *p)
     }
 
     fprintf(file, "digraph our_graph {\n");
-    
+
     fprintf(file, "INPUT%d -> LIST%d;\n", tab[0], ++tab[1]);
     list_traversal_print(p->ast->list);
 

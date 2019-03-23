@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/42sh.dir/src/print_ast.c.o"
   "CMakeFiles/42sh.dir/src/opt-parser.c.o"
   "CMakeFiles/42sh.dir/src/exec.c.o"
+  "CMakeFiles/42sh.dir/src/hashmap.c.o"
   "42sh.pdb"
   "42sh"
 )

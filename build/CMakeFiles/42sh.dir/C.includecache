@@ -41,6 +41,8 @@ ast.h
 /home/k-ou/amar.slimane-42sh-apping/src/ast.h
 exe.h
 /home/k-ou/amar.slimane-42sh-apping/src/exe.h
+hashmap.h
+/home/k-ou/amar.slimane-42sh-apping/src/hashmap.h
 
 /home/k-ou/amar.slimane-42sh-apping/src/extract.c
 string.h
@@ -63,6 +65,18 @@ parser.h
 /home/k-ou/amar.slimane-42sh-apping/src/parser.h
 ast.h
 /home/k-ou/amar.slimane-42sh-apping/src/ast.h
+
+/home/k-ou/amar.slimane-42sh-apping/src/hashmap.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+hashmap.h
+/home/k-ou/amar.slimane-42sh-apping/src/hashmap.h
+
+/home/k-ou/amar.slimane-42sh-apping/src/hashmap.h
 
 /home/k-ou/amar.slimane-42sh-apping/src/ini.c
 stdio.h

@@ -12,6 +12,9 @@ l exec ne marche pas. il dit '' n est pas un directory donc indiqué . à défau
 
 ASSIGNEMENT : a=b - doit marcher mais ne marche pas car parser_readinteger()
 
+TOUJOURS LE PROBLEME DES CROCHETS
+
+NE PAS EXIT() APRES UNE FAUTE LORS DE L EXECUTION (jouer avec status)
 
 -RESOURCE_FILE
 - charger 2 fichiers /etc/42shrc & ~/.bashrc
