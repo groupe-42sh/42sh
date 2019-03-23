@@ -24,6 +24,12 @@ int main(int ac, char **av)
     if (!inifile)
         exit(EXIT_FAILURE);
 
+    FILE *shrc1 = fopen("/etc/42shrc", "r");
+    FILE *shrc2 = fopen("~/.42shrc", "r");
+
+    if(shrc1==NULL && shrc2==NULL)
+        printf("No 42shrc found\n");
+
     fseek(inifile, 0, SEEK_END);
     long fsize = ftell(inifile);
     fseek(inifile, 0, SEEK_SET);
@@ -45,5 +51,7 @@ int main(int ac, char **av)
         printf("parsing failed at %ld\n", p->index);
     }
     free(content);
+    fclose(shrc1);
+    fclose(shrc2);
     return 0;
 }
