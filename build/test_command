@@ -1,0 +1,24 @@
+**************************Parsing failed at 4******************************
+nom="mah"
+if [ $nom = "mah" ]
+then
+echo "Salut mah!"
+fi
+
+**************************parsing failed at 0******************************
+
+for i in 1 2 3 4 5 6
+do 
+	echo $i
+done
+
+***********************parsing failed at 0*********************************
+a=0
+until ((a==53 ))
+do
+echo -e "saisir 53:\c"
+read a
+done
+
+**********************parsing failed**************************************
+J’ai essayé toutes les commandes que j’ai pu trouvé sur le net, les commandes de base et les commandes système. Elles ont toutes marché sauf quand j’y ajoute des options. A chaque fois que je rajoite une option à une commande j'ai un parsing failed.
