@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 for i in 1 2 3 4 5 6
 do 
 	echo $i
 done
+=======
+i=3
+if [ i = 3 ]
+then
+    echo i
+fi
+>>>>>>> 9232d3eed2688508f1cd794ba60831991b30ea0a

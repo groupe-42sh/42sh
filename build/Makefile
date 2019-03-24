@@ -204,6 +204,33 @@ src/extract.c.s:
 	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/extract.c.s
 .PHONY : src/extract.c.s
 
+src/hashmap.o: src/hashmap.c.o
+
+.PHONY : src/hashmap.o
+
+# target to build an object file
+src/hashmap.c.o:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/hashmap.c.o
+.PHONY : src/hashmap.c.o
+
+src/hashmap.i: src/hashmap.c.i
+
+.PHONY : src/hashmap.i
+
+# target to preprocess a source file
+src/hashmap.c.i:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/hashmap.c.i
+.PHONY : src/hashmap.c.i
+
+src/hashmap.s: src/hashmap.c.s
+
+.PHONY : src/hashmap.s
+
+# target to generate assembly for a file
+src/hashmap.c.s:
+	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/hashmap.c.s
+.PHONY : src/hashmap.c.s
+
 src/ini.o: src/ini.c.o
 
 .PHONY : src/ini.o
@@ -330,6 +357,9 @@ help:
 	@echo "... src/extract.o"
 	@echo "... src/extract.i"
 	@echo "... src/extract.s"
+	@echo "... src/hashmap.o"
+	@echo "... src/hashmap.i"
+	@echo "... src/hashmap.s"
 	@echo "... src/ini.o"
 	@echo "... src/ini.i"
 	@echo "... src/ini.s"

@@ -8,7 +8,7 @@ void assignement_word_traversal
     (struct ast_node_assignement_word *assignement_word)
 {
     printf("ASSIGNEMENT_VAR = %s\n", assignement_word->var_name);
-    printf("ASSIGNEMENT_VALUE = %d\n", assignement_word->value);
+    printf("ASSIGNEMENT_VALUE = %s\n", assignement_word->value);
 }
 
 void word_traversal(struct ast_node_word *word)

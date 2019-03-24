@@ -6,6 +6,10 @@
 #include <sys/wait.h>
 #include "ast.h"
 #include "exe.h"
+#include "hashmap.h"
+#define HASHTABLE_SIZE 15
+
+struct ht *table = NULL;
 
 int  execute(char **argv)
 {
@@ -16,18 +20,28 @@ int  execute(char **argv)
      * voir si autre solution
      */
     if ((strcmp(argv[0], "ls") == 0) && (strcmp(argv[1], "") == 0))
+    {
         strcpy(argv[1], ".");
+    }
+
+    /*
+     * en attendant de savoir d 'ou provient l espace additionnel...
+     */
+    if ((strcmp(argv[1], "") == 0))
+    {
+        argv[1] = NULL;
+    }
 
     if ((pid = fork()) < 0)
     {
-        printf("*** ERROR: forking child process failed\n");
+        perror("*** ERROR: forking child process failed\n");
         exit(1);
     }
     else if (pid == 0)
     {
         if (execvp(*argv, argv) < 0)
         {
-            printf("*** ERROR: exec failed\n");
+            perror("*** ERROR: exec failed\n");
             exit(1);
         }
     }
@@ -60,7 +74,7 @@ void analyze_prefix(struct ast_node_command *command, char **instruction)
     struct ast_node_prefix *prefix = command->simple_command->prefix_list;
 
     char *str = malloc(200);
-            
+
     while (prefix)
     {
         if (prefix->assignement_word)
@@ -68,9 +82,7 @@ void analyze_prefix(struct ast_node_command *command, char **instruction)
             //traitement pour les assignements
             strcat(*instruction, prefix->assignement_word->var_name);
             strcat(*instruction, "=");
-            int a = prefix->assignement_word->value;
-            snprintf(str, 10, "%d", a);
-            strcat(*instruction, str);
+            strcat(*instruction, prefix->assignement_word->value);
             //boucler sur les differents assign ???
         }
         else
@@ -105,7 +117,7 @@ void analyze_element(struct ast_node_command *command, char **instruction)
 {
     struct ast_node_element *element =
         command->simple_command->element_list;
-    
+
     char *str = malloc(200);
     while (element)
     {
@@ -244,5 +256,35 @@ int exec_rule_while(struct ast_node_rule_while *_while)
     {
         return exec_do_group(_while->do_group);
     }
+    return 0;
+}
+
+
+
+int exec_assignement_word(struct ast_node_assignement_word *assignement_word)
+{
+    if (!table)
+    {
+        table = ht_malloc(HASHTABLE_SIZE);
+    }
+    
+    char *var_name = assignement_word->var_name;
+    char *value = assignement_word->value;
+
+    ht_find_or_put(var_name, value, table, fvn_hash);
+    ht_print(stdout, table); 
+
+    
+    //char *instruction = malloc(200);
+    //memset(instruction, '\0', 200);
+    //
+    //strcpy(instruction, "0 -eq 1");
+    //char **instr = malloc(50 * sizeof(char *));
+    //if (!instr)
+    //    return 0;
+    //parse(instruction, instr);
+    //int r = execute(instr);
+    //free(instruction);
+    //r =r ;
     return 0;
 }

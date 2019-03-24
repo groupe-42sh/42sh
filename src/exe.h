@@ -7,4 +7,5 @@ int get_simple_command_cl(struct ast_node_compound_list *compound_list);
 int exec_compound_list(struct ast_node_compound_list *compound_list);
 int exec_rule_if(struct ast_node_rule_if *_if);
 int exec_rule_while(struct ast_node_rule_while *_while);
+int exec_assignement_word(struct ast_node_assignement_word *assignement_word);
 #endif

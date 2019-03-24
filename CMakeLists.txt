@@ -11,6 +11,7 @@ set(SRCS
     src/print_ast.c
     src/opt-parser.c
     src/exec.c
+    src/hashmap.c
 	)
 
 set(HEADERS
@@ -20,6 +21,7 @@ set(HEADERS
     src/print_ast.h
     src/opt-parser.h
     src/exe.h
+    src/hashmap.h
 	)
 
 # On indique que l'on souhaite obtenir un executable "42sh" compilé

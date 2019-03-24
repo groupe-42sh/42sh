@@ -167,7 +167,7 @@ struct ast_node_word {
 };
 struct ast_node_assignement_word {
   char *var_name;
-  int value;
+  char *value;
   struct ast_node_assignement_word *next;
 };
 void assignement_word_traversal(struct ast_node_assignement_word *assignement_word);
@@ -194,8 +194,5 @@ void pipeline_traversal(struct ast_node_pipeline *pipeline);
 void and_or_traversal(struct ast_node_and_or *and_or);
 void list_traversal(struct ast_node_list *list);
 void full_traversal(struct parser_s *p);
-
-
-
 
 #endif

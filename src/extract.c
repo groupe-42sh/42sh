@@ -31,6 +31,15 @@ char *get_word(struct parser_s *p)
     }
     return word;
 }
+char *get_assignement_value(struct parser_s *p)
+{
+    int tmp = p->index;
+    while (!parser_readinset(p, " \t\n;'\"#"))
+    {
+        ++p->index;
+    }
+    return strndup(&p->input[tmp], p->index - tmp);
+}
 int get_value(struct parser_s *p)
 {
     int r = 0;
@@ -145,7 +154,6 @@ void exit_on_error(struct parser_s *p)
 
     exit(EXIT_FAILURE);
 }
-
 struct ast_node_assignement_word *get_assignement_word(struct parser_s *p)
 {
     int tmp = p->index;
@@ -154,9 +162,9 @@ struct ast_node_assignement_word *get_assignement_word(struct parser_s *p)
     struct ast_node_assignement_word *assignement_word =
         malloc(sizeof(struct ast_node_assignement_word));
     if (!(assignement_word->var_name = get_word(p)) || parser_peekchar(p,' ')
-            || (!(c=parser_readchar(p, '=')))
+            || (!(c = parser_readchar(p, '=')))
             || parser_peekchar(p,' ')
-            || (!(assignement_word->value = get_value(p))))
+            || (!(assignement_word->value = get_assignement_value(p))))
     {
         if (!is_delimiter(p) && !get_word(p) && !parser_peekinset(p, "<>-&|")
                 && (get_io_number(p) == -1))
