@@ -194,19 +194,19 @@ bool is_delimiter(struct parser_s *p)
         parser_peekchar(p, ';') || parser_peekchar(p, '&')
         || parser_peekchar(p,'\n') || parser_peekchar(p, '(')
         || parser_peekchar(p,EOF)|| parser_peekchar(p, '\0')
-        || parser_peekchar(p, ')') || parser_peekchar(p, '=')
+      || parser_peekchar(p, ')')  || parser_peekchar(p, '=')
         || parser_peekchar(p, '|') || parser_peektext(p,"&&")
         || parser_peektext(p,"||");
 }
 bool parser_readidentifier(struct parser_s *p)
 {
     eat_spaces(p);
-    if (read_min(p) || read_maj(p) || read_underscore(p))
+    if (read_min(p) || read_maj(p) || read_underscore(p)) 
     {
         while (!is_delimiter(p))
         {
             if (!(read_min(p) || read_maj(p)
-                        || read_underscore(p) || read_digit(p)))
+		  || read_underscore(p) || read_digit(p)))
                 return false;
         }
         return true;

@@ -5,7 +5,7 @@
 #include "ast.h"
 #include "print_ast.h"
 #include "opt-parser.h"
-#include "exe.h"
+#include "exec.h"
 
 int main(int ac, char **av)
 {
@@ -36,9 +36,9 @@ int main(int ac, char **av)
 //            p->ast->list->and_ors->pipeline->command->shell_command->child._if;
 //
 //        exec_rule_if(_if);
-        struct ast_node_rule_while *_while =
+        /*struct ast_node_rule_while *_while =
             p->ast->list->and_ors->pipeline->command->shell_command->child._while;
-        exec_rule_while(_while);
+	    exec_rule_while(_while);*/
      
 //        struct ast_node_assignement_word *aw =
 //            malloc(sizeof(struct ast_node_assignement_word));

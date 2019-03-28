@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "ast.h"
-#include "exe.h"
+#include "exec.h"
 #include "hashmap.h"
 #define HASHTABLE_SIZE 15
 
@@ -120,37 +120,37 @@ void analyze_element(struct ast_node_command *command, char **instruction)
 
     char *str = malloc(200);
     while (element)
-    {
-        if (element->word)
-        {
-            strcat(*instruction, element->word->str);
-            strcat(*instruction, " ");
-        }
-        else
-        {
-            struct ast_node_redirection *redirection =
-                element->redirection;
-
-            snprintf(str, 10, "%d", redirection->io_number);
-            strcat(*instruction, str);
-            //!!! normalement en fonction du type redirection...
-            //mais pour aller plus vite:
-            strcat(*instruction, ">");
-
-            if (redirection->word_heredoc.heredoc)
-            {
-                //on stocke les '"' ou PAS ?
-                //si oui:
-                strcat(*instruction, redirection->word_heredoc.heredoc);
-            }
-            else
-            {
-                strcat(*instruction, redirection->word_heredoc.word->str);
-            }
-        }
-
-        element = element->next;
-    }
+      {
+	if (element->word)
+	  {
+	    strcat(*instruction, element->word->str);
+	    strcat(*instruction, " ");
+	  }
+	else
+	  {
+	    struct ast_node_redirection *redirection =
+	      element->redirection;
+	    
+	    snprintf(str, 10, "%d", redirection->io_number);
+	    strcat(*instruction, str);
+	    //!!! normalement en fonction du type redirection...
+	    //mais pour aller plus vite:
+	    strcat(*instruction, ">");
+	    
+	    if (redirection->word_heredoc.heredoc)
+	      {
+		//on stocke les '"' ou PAS ?
+		//si oui:
+		strcat(*instruction, redirection->word_heredoc.heredoc);
+	      }
+	    else
+	      {
+		strcat(*instruction, redirection->word_heredoc.word->str);
+	      }
+	  }
+	
+	element = element->next;
+      }
     //free(str);
 }
 

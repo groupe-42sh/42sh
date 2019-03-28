@@ -31,6 +31,16 @@ char *get_word(struct parser_s *p)
     }
     return word;
 }
+char *get_word_condition(struct parser_s *p)
+{
+   int tmp = p->index;
+    char *word = NULL;
+    if (!parser_readinset(p," ,\t\n&\0|();" ))
+    {
+        word = strndup(&p->input[tmp], p->index - tmp);
+    }
+    return word;
+}
 char *get_assignement_value(struct parser_s *p)
 {
     int tmp = p->index;
@@ -666,6 +676,7 @@ struct ast_node_simple_command *parser_readsimplecommand(struct parser_s *p)
         new_element->next = NULL;
     }
 
+    if (simple_command->element_list)
 
     if (!(simple_command->element_list) && !(simple_command->prefix_list))
     {
@@ -873,7 +884,7 @@ bool parser_readinput (struct parser_s *p)
     int tmp = p->index;
     p->ast = malloc(sizeof(struct ast_node_input));
     p->ast->list = NULL;
-    if (parser_readchar(p, '\n'))
+    if (parser_readchar(p, '\n') && parser_eof(p))
         return true;
     if (parser_eof(p))
         return true;
