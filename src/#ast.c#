@@ -1,7 +1,7 @@
 /*!
  * \file ast.c
  * \author Mah Aminata
- * \version 1.0
+ * \version 0.1
  */
 #include "ast.h"
 #include "parser.h"
@@ -9,7 +9,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void assignement_word_traversal
+/*!
+ * \brief 
+void assnement_word_traversal
     (struct ast_node_assignement_word *assignement_word)
 {
     printf("ASSIGNEMENT_VAR = %s\n", assignement_word->var_name);

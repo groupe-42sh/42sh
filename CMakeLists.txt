@@ -2,7 +2,7 @@ project(42sh)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra -pedantic -g")
-# Création de variables avec les fichiers à compiler
+# creation of variables with source and header files
 set(SRCS
 	src/ast.c
 	src/extract.c
@@ -24,9 +24,17 @@ set(HEADERS
     src/hashmap.h
 	)
 
-# On indique que l'on souhaite obtenir un executable "42sh" compilé
-## à partir des fichiers décrits par les variables créées plus haut
+#Indicate that we want an executable "42sh" with variables 
 
 add_executable(
 	42sh ${SRCS} ${HEADERS}	
 	)
+
+#Run Test suite
+add_custom_target(check
+	COMMAND python tests/test.py
+	)
+
+#Run Doxygen
+add_custom_target(doc
+                  COMMAND doxygen doc/Doxyfile)

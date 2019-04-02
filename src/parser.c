@@ -1,8 +1,14 @@
+/*!
+ * \file parser.c
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include "parser.h"
 #include "extract.h"
-
+/*!
+ * \struct parser_s
+ * \brief returns a pointer to a parser_s type structure
+ */
 struct parser_s *parser_new_from_string(const char *text)
 {
     struct parser_s *p = malloc(sizeof(struct parser_s));
@@ -13,6 +19,12 @@ struct parser_s *parser_new_from_string(const char *text)
     return p;
 }
 
+/*!
+ * \fn void parser_clean(struct parser_s *p)
+ * \brief this function cleans the content of parser_s
+ * \param strcuct parser_s 
+ */
+
 void parser_clean(struct parser_s *p)
 {
     p->input = NULL;
@@ -21,6 +33,11 @@ void parser_clean(struct parser_s *p)
     free(p);
 }
 
+/*!
+ * \fn int parser_eof(struct parser_s *p)
+ * \brief this function checks EOF and returns 1 or 0
+ * \param struct parser_s
+ */
 int parser_eof(struct parser_s *p)
 {
     if ((p->input[p->index] == '\0') || (p->input[p->index] == EOF))
@@ -28,12 +45,22 @@ int parser_eof(struct parser_s *p)
     return 0;
 }
 
+/*!
+ * \fn char parser_getchar(struct parser_s *p)
+ * \brief This function permits to retrieve a char
+ * \param struct parser_s *p)
+ */
 char parser_getchar(struct parser_s *p)
 {
     p->index += 1;
     return p->input[p->index - 1];
 }
 
+/*!
+ * \fn int parser_peekchar(struct parser_s *p, char c)
+ * \brief This function returns 1 if the current char = C else it returns 0
+ * \param struct parser_p
+ */
 int parser_peekchar(struct parser_s *p, char c)
 {
     if (p->input[p->index] == c)
